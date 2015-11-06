@@ -14,22 +14,24 @@
    `cd /opt`  
    `sudo chmod -R +x android-toolchain-aarch64-4.9-host-linux-x86_64-android-21`  
 6. Clone and build this repository  
+   `cd ~`  
    `git clone https://github.com/darryln/ara-fw-test-public.git`  
    `cd ara-fw-test-public`  
    `make all`  
 7. You can also `make --always-make` to force rebuild, and `make clean`.  
-8. Test app executables are placed under `ara-fw-test-public/build/apps/`.  
+8. Test app executables are placed under `~/ara-fw-test-public/build/apps/`.  
 
 ##### Notes
-* Functional test apps dump the command line args by calling dumpargs, which is part of the common test app library, libfwtest.a.
+* By default, all functional test apps dump their command line args by calling dumpargs, which is part of the common test app library, libfwtest.a.
 
-* To add code to libfwtest.a, put your .c file in apps/lib and declare the functions in apps/lib/include/libfwtest.h.  All .c files under apps/lib get built into libfwtest.a automatically, no need to update the Makefile for it.
+* To add code to libfwtest.a, put your .c file in apps/lib and declare the functions you want to expose in apps/lib/include/libfwtest.h.  All .c files under apps/lib get built into libfwtest.a automatically, so there is no need to update the Makefile for it.
 
-* New test apps can be created under apps/greybus, apps/stress, apps/performance, and apps/other
+* New test apps can be created under apps/functional, apps/greybus, apps/stress, apps/performance, and apps/other
   * mkdir \<name of test app\>
   * copy an existing test app and Makefile there
   * modify Makefile and source files as needed.
   * There is no need to modify higher-level Makefiles, the newly added test app will get built automatically.
+  * If you add a test, you must also update the supported test cases in TestLink. Each automated test case must have a test app. 
 
 Commit messages should be formatted as follows:
 ```
