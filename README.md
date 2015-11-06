@@ -29,8 +29,8 @@ git clone https://github.com/darryln/ara-fw-test-public.git
 cd ara-fw-test-public
 make all
 ```
-You can also `make --always-make` to force rebuild, and `make clean`
-8. test app executables are placed under `ara-fw-test-public/build/apps/`.
+7. You can also `make --always-make` to force rebuild, and `make clean`.  
+8. Test app executables are placed under `ara-fw-test-public/build/apps/`.  
 
 ##### Notes
 * Functional test apps dump the command line args by calling dumpargs, which is part of the common test app library, libfwtest.a.
@@ -38,9 +38,7 @@ You can also `make --always-make` to force rebuild, and `make clean`
 * To add code to libfwtest.a, put your .c file in apps/lib and declare the functions in apps/lib/include/libfwtest.h.  All .c files under apps/lib get built into libfwtest.a automatically, no need to update the Makefile for it.
 
 * New test apps can be created under apps/greybus, apps/stress, apps/performance, and apps/other
-  1. mkdir <name of test app>
-  2. copy an existing test app and Makefile there
-  3. modify Makefile and source files as needed.
-  4. There is no need to modify higher-level Makefiles, the newly added test app will get built automatically.
-
-  
+  * mkdir <name of test app>
+  * copy an existing test app and Makefile there
+  * modify Makefile and source files as needed.
+  * There is no need to modify higher-level Makefiles, the newly added test app will get built automatically.
