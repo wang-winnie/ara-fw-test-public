@@ -51,4 +51,6 @@ Review URL:  http://externalgit2.bsquare.com/reviewboard/r/###/
 Reviewed by:  Bob Hacker <bob@hacker.com>, Jenny Jira <jenny@jira.com>
 Signed-off-by:  Joe Coder <joe@coder.com> 
 ```
-
+Note: if you have set up your .gitconfig with your name and email,  'git -s' adds the "Signed-off-by: your name <your email>" automatically.  However, best practice is to use a .gitmessage template in your .gitconfig:  
+`[commit]`  
+    `template = ~/.gitmessage`
