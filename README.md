@@ -35,6 +35,8 @@ Commit messages should be formatted as follows:
 ```
          1         2         3         4         5         6         7
 1234567890123456789012345678901234567890123456789012345678901234567890123456
+```
+```
 [name of test app]:  One-line short message, max 60 columns. 
 <blank line>
 This is the long message. Please be descriptive and provide as much detail 
