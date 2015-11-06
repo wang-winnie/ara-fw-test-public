@@ -26,7 +26,7 @@
 * To add code to libfwtest.a, put your .c file in apps/lib and declare the functions in apps/lib/include/libfwtest.h.  All .c files under apps/lib get built into libfwtest.a automatically, no need to update the Makefile for it.
 
 * New test apps can be created under apps/greybus, apps/stress, apps/performance, and apps/other
-  * mkdir <name of test app>
+  * mkdir \<name of test app\>
   * copy an existing test app and Makefile there
   * modify Makefile and source files as needed.
   * There is no need to modify higher-level Makefiles, the newly added test app will get built automatically.
