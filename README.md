@@ -56,3 +56,13 @@ Signed-off-by:  Joe Coder <joe@coder.com>
 Note: if you have set up your .gitconfig with your name and email,  'git -s' adds the "Signed-off-by: your name <your email>" automatically.  However, best practice is to use a .gitmessage template in your .gitconfig:  
 `[commit]`  
     `template = ~/.gitmessage`
+
+Note: the test app Makefile (i.e. the Makefile contained in the same folder as the app's source code) generates the app executable with the same name as the containing folder.
+
+i.e.
+apps/greybus/i2ctest   -> build/apps/i2ctest
+apps/functional/cam_test -> build/apps/cam_test
+apps/other/sometest -> build/apps/sometest
+
+This is the desired behavior based on the APP variable defined in the Makefile, do not modify.
+
