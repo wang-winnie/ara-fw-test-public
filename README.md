@@ -1,34 +1,22 @@
 ##### ara-fw-test-public
 
 1. Download NDK  
-```
-http://dl.google.com/android/ndk/android-ndk-r10e-linux-x86_64.bin  
-```
+   `http://dl.google.com/android/ndk/android-ndk-r10e-linux-x86_64.bin`
 2. Make it executable  
-```
-chmod a+x android-ndk-r10e-linux-x86_64.bin  
-```
+   `chmod a+x android-ndk-r10e-linux-x86_64.bin`
 3. Install NDK  
-```
-./android-ndk-r10e-linux-x86_64.bin  
-```
+   `./android-ndk-r10e-linux-x86_64.bin`
 4. Extract toolchain  
-```
-sudo /home/<USER>/android-ndk-r10e/build/tools/make-standalone-toolchain.sh \  
-   --toolchain=aarch64-linux-android-4.9 --system=linux-x86_64 --platform=android-21 \  
-   --install-dir=/opt/android-toolchain-aarch64-4.9-host-linux-x86_64-android-21  
-```
+   `sudo /home/<USER>/android-ndk-r10e/build/tools/make-standalone-toolchain.sh \`  
+   `  --toolchain=aarch64-linux-android-4.9 --system=linux-x86_64 --platform=android-21 \ `   
+   `  --install-dir=/opt/android-toolchain-aarch64-4.9-host-linux-x86_64-android-21 `  
 5. Make toolchain runnable  
-```
-cd /opt  
-sudo chmod -R +x android-toolchain-aarch64-4.9-host-linux-x86_64-android-21  
-```
+   `cd /opt`  
+   `sudo chmod -R +x android-toolchain-aarch64-4.9-host-linux-x86_64-android-21`  
 6. Clone and build this repository  
-```
-git clone https://github.com/darryln/ara-fw-test-public.git  
-cd ara-fw-test-public  
-make all  
-```
+   `git clone https://github.com/darryln/ara-fw-test-public.git`  
+   `cd ara-fw-test-public`  
+   `make all`  
 7. You can also `make --always-make` to force rebuild, and `make clean`.  
 8. Test app executables are placed under `ara-fw-test-public/build/apps/`.  
 
