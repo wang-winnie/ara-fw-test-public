@@ -30,3 +30,23 @@
   * copy an existing test app and Makefile there
   * modify Makefile and source files as needed.
   * There is no need to modify higher-level Makefiles, the newly added test app will get built automatically.
+
+Commit messages should be formatted as follows:
+```
+         1         2         3         4         5         6         7
+1234567890123456789012345678901234567890123456789012345678901234567890123456
+[name of test app]:  One-line short message, max 60 columns. 
+<blank line>
+This is the long message. Please be descriptive and provide as much detail 
+as possible. This message should provide enough info to allow someone to 
+complete the statement "If you apply this patch, it will ________."  
+Paragraphs in the long message should be manually wrapped at 76 columns. 
+<blank line>
+Test case:
+Testing done:
+Bug number:
+Review URL:  http://externalgit2.bsquare.com/reviewboard/r/###/
+Reviewed by:  Bob Hacker <bob@hacker.com>, Jenny Jira <jenny@jira.com>
+Signed-off-by:  Joe Coder <joe@coder.com> 
+```
+
