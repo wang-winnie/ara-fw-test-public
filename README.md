@@ -47,10 +47,12 @@ complete the statement "If you apply this patch, it will ________."
 Paragraphs in the long message should be manually wrapped at 76 columns. 
 <blank line>
 Test case: [list all test cases supported or impacted by this commit]
-Testing done:[brief one-line description only, use the RB "Testing Done" section to capture more details]
+Testing done:[brief one-line description only, use the RB "Testing Done" 
+ section to capture more details]
 Bug number: [JIRA defect assigned, otherwise leave blank]
 Review URL:  http://externalgit2.bsquare.com/reviewboard/r/[review number]/
-Reviewed by:  Bob Hacker <hacker_bob@projectara.com>, Jenny Jira <jira_jenny@projectara.com>
+Reviewed by:  Bob Hacker <hacker_bob@projectara.com>, 
+  Jenny Jira <jira_jenny@projectara.com>
 Signed-off-by:  Joe Coder <coder_joe@projectara.com> 
 ```
 Note: if you have set up your .gitconfig with your name and email,  'git -s' adds the "Signed-off-by: your name <your email>" automatically.  However, best practice is to use a .gitmessage template in your .gitconfig:  
