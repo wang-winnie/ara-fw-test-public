@@ -33,13 +33,24 @@
   * There is no need to modify higher-level Makefiles, the newly added test app will get built automatically.
   * If you add a test, you must also update the supported test cases in TestLink. Each automated test case must have a test app. 
 
+The test app Makefile (i.e. the Makefile contained in the same folder as the app's source code) generates the app executable with the same name as the containing folder, i.e. :  
+
+  apps/greybus/i2ctest   -> build/apps/i2ctest  
+  apps/functional/cam_test -> build/apps/cam_test  
+  apps/other/sometest -> build/apps/sometest  
+
+This is the desired behavior based on the APP variable defined in the Makefile, please do not modify.  
+
+------
+
+###Commit Message Formatting
 Commit messages should be formatted as follows:
 ```
          1         2         3         4         5         6         7
 1234567890123456789012345678901234567890123456789012345678901234567890123456
 ```
 ```
-[name of test app]:  One-line short message, max 60 columns. 
+[category or app]:  One-line short message, max 60 columns. 
 <blank line>
 This is the long message. Please be descriptive and provide as much detail 
 as possible. This message should provide enough info to allow someone to 
@@ -55,16 +66,32 @@ Reviewed by:  Bob Hacker <hacker_bob@projectara.com>,
   Jenny Jira <jira_jenny@projectara.com>
 Signed-off-by:  Joe Coder <coder_joe@projectara.com> 
 ```
-Note: if you have set up your .gitconfig with your name and email,  'git -s' adds the "Signed-off-by: your name <your email>" automatically.  However, best practice is to use a .gitmessage template in your .gitconfig:  
-`[commit]`  
-    `template = ~/.gitmessage`
 
-Note: the test app Makefile (i.e. the Makefile contained in the same folder as the app's source code) generates the app executable with the same name as the containing folder.
+#####Additional Notes
 
-i.e.
-apps/greybus/i2ctest   -> build/apps/i2ctest
-apps/functional/cam_test -> build/apps/cam_test
-apps/other/sometest -> build/apps/sometest
+1. More information is better. Describe what you are changing in detail, and why.  You're writing the code, so you're the only one that knows the details, and the commit message is the place to capture that knowledge, otherwise it may be lost. 
+2. If your written English isn't so good, use an online translator so you can express in your primary language.
+3. The content and formatting that is shown on ReviewBoard is what *should* end up in the repo. It's *up to you* to make sure that happens.
+4. For test apps, the summary should look like this: 
+   -  greybus/gpiotest: initial commit  
+   -  functional/sd_carddet:  add arg for physical media detect  
+   -  performance/melt_cpu: increase acceptable thermal limits  
+5. For non-apps, the summary should look like this:
+   -  libfwtest: add APBx reset function  
+   -  build: modify top-level make parameters  
+   -  lava/json: update job manifest for DB3   
+6. The one-line summary must not include punctuation at the end of the line
+7. For all commits other than the initial commit, changes should be localized and atomic as possible. 
+   - Do not combine unrelated changes in multiple apps.  An exception to this would be an global change that is applied to all apps simultaneously.
+   - Do not combine an app change with a common lib change.
+   - Do not add more than one feature at a time.
+   - When in doubt, more commits is usually better. 
+8. Best practice create the commit message with the right formatting in the first place. You can have git prefill the commit message by using a template:
+   - create a template file .git/commit-msg  (see below for example content)
+   - add 2 lines to .git/config:  
+   - `  [commit]`  
+   - `     template = .git/commit-msg`  
+9. After you 'rbt post', but before you publish, you can edit your commit message in ReviewBoard. 
+10. After you pass review, before pushing to master, you have a third and final chance to edit the commit. Be sure to complete the ReviewBoard URL and review number, and the Reviewed-by fields before pushing to master.
 
-This is the desired behavior based on the APP variable defined in the Makefile, do not modify.
 
