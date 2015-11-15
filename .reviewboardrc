@@ -1,4 +1,0 @@
-REPOSITORY = 'ara-fw-test-public'
-REVIEWBOARD_URL = 'http://externalgit2.bsquare.com/reviewboard'
-GUESS_FIELDS = 'auto'
-TARGET_GROUPS = 'projectara-qa'
