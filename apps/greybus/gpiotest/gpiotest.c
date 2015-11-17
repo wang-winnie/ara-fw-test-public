@@ -69,7 +69,7 @@ static void print_usage()
     printf("    -3: GPIO pin3 number for multiple pins test\n");
     printf("Example : case ARA-270 use SDB board, GPIO had 3 pins can\n");
     printf("     test(GPIO0 GPIO8 GPIO9)\n");
-    printf("     ./gpiotest -c 270 -t m -1 0 -2 8 -9\n");
+    printf("     ./gpiotest -c 270 -t m -1 0 -2 8 -3 9\n");
  }
 
 /**
@@ -162,7 +162,7 @@ static int ARA_263_get_count(struct gpio_app_info *info)
     info->max_count = atoi(countbuf);
 
     snprintf(gpiostr, sizeof(gpiostr), "GPIO count: %d", info->max_count);
-    print_log(LOG_TAG, info->case_id, gpiostr);
+    print_test_case_log(LOG_TAG, info->case_id, gpiostr);
 
     print_test_result(info->case_id, ret);
 
@@ -2193,7 +2193,8 @@ static int switch_case_number(struct gpio_app_info *info)
             case 417:
                 return ARA_417_both_to_none(info);
             default:
-                print_log(LOG_TAG, 0, "Error: The command had error case_id.");
+                print_test_case_log(LOG_TAG, 0,
+                                    "Error: The command had error case_id.");
                 return -EINVAL;
         }
 }

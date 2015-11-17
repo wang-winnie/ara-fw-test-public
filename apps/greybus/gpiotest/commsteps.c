@@ -124,7 +124,7 @@ int activate_gpio_pin(int case_id, int gpio_pin)
     snprintf(gpiostr, sizeof(gpiostr), "%s%d", "Activate GPIO Pin: gpio",
              gpio_pin);
     if(!ret) {
-        print_log(LOG_TAG, case_id, gpiostr);
+        print_test_case_log(LOG_TAG, case_id, gpiostr);
     }
 
     return ret;
@@ -152,7 +152,7 @@ int activate_gpio_multiple_pin(int case_id, int gpio_pin1, int gpio_pin2,
     snprintf(gpiostr, sizeof(gpiostr), "%s%i", "Activate GPIO Pin: gpio",
              gpio_pin1);
     if(!ret) {
-        print_log(LOG_TAG, case_id, gpiostr);
+        print_test_case_log(LOG_TAG, case_id, gpiostr);
     }
 
     snprintf(gpiostr, sizeof(gpiostr), "%d\n", gpio_pin2);
@@ -161,7 +161,7 @@ int activate_gpio_multiple_pin(int case_id, int gpio_pin1, int gpio_pin2,
     snprintf(gpiostr, sizeof(gpiostr), "%s%i", "Activate GPIO Pin: gpio",
              gpio_pin2);
     if(!ret) {
-        print_log(LOG_TAG, case_id, gpiostr);
+        print_test_case_log(LOG_TAG, case_id, gpiostr);
     }
 
     snprintf(gpiostr, sizeof(gpiostr), "%d\n", gpio_pin3);
@@ -170,7 +170,7 @@ int activate_gpio_multiple_pin(int case_id, int gpio_pin1, int gpio_pin2,
     snprintf(gpiostr, sizeof(gpiostr), "%s%i", "Activate GPIO Pin: gpio",
              gpio_pin3);
     if(!ret) {
-        print_log(LOG_TAG, case_id, gpiostr);
+        print_test_case_log(LOG_TAG, case_id, gpiostr);
     }
 
     return ret;
@@ -194,7 +194,7 @@ int deactivate_gpio_pin(int case_id, int gpio_pin)
     snprintf(gpiostr, sizeof(gpiostr), "%s%i", "Deactivate GPIO Pin: gpio",
              gpio_pin);
     if(!ret) {
-        print_log(LOG_TAG, case_id, gpiostr);
+        print_test_case_log(LOG_TAG, case_id, gpiostr);
     }
 
     return ret;
@@ -222,7 +222,7 @@ int deactivate_gpio_multiple_pin(int case_id, int gpio_pin1, int gpio_pin2,
     snprintf(gpiostr, sizeof(gpiostr), "%s%i", "Deactivate GPIO Pin: gpio",
              gpio_pin1);
     if(!ret) {
-        print_log(LOG_TAG, case_id, gpiostr);
+        print_test_case_log(LOG_TAG, case_id, gpiostr);
     }
 
     snprintf(gpiostr, sizeof(gpiostr), "%d\n", gpio_pin2);
@@ -231,7 +231,7 @@ int deactivate_gpio_multiple_pin(int case_id, int gpio_pin1, int gpio_pin2,
     snprintf(gpiostr, sizeof(gpiostr), "%s%i", "Deactivate GPIO Pin: gpio",
              gpio_pin2);
     if(!ret) {
-        print_log(LOG_TAG, case_id, gpiostr);
+        print_test_case_log(LOG_TAG, case_id, gpiostr);
     }
 
     snprintf(gpiostr, sizeof(gpiostr), "%d\n", gpio_pin3);
@@ -240,7 +240,7 @@ int deactivate_gpio_multiple_pin(int case_id, int gpio_pin1, int gpio_pin2,
     snprintf(gpiostr, sizeof(gpiostr), "%s%i", "Deactivate GPIO Pin: gpio",
              gpio_pin3);
     if(!ret) {
-        print_log(LOG_TAG, case_id, gpiostr);
+        print_test_case_log(LOG_TAG, case_id, gpiostr);
     }
 
     return ret;
@@ -265,7 +265,7 @@ int set_gpio_direction(int case_id, int gpio_pin, char *gpio_direction, int len)
     ret = debugfs_set_attr(gpiostr, "direction", gpio_direction, len);
     snprintf(gpiostr, sizeof(gpiostr), "Set GPIO%d direction = %s",  gpio_pin,
              gpio_direction);
-    print_log(LOG_TAG, case_id, gpiostr);
+    print_test_case_log(LOG_TAG, case_id, gpiostr);
     return ret;
 }
 
@@ -288,7 +288,7 @@ int get_gpio_direction(int case_id, int gpio_pin, char *gpio_direction, int len)
     ret = debugfs_get_attr(gpiostr, "direction", gpio_direction, len);
     snprintf(gpiostr, sizeof(gpiostr), "GPIO%d direction = %s", gpio_pin,
              gpio_direction);
-    print_log(LOG_TAG, case_id, gpiostr);
+    print_test_case_log(LOG_TAG, case_id, gpiostr);
     return ret;
 }
 
@@ -311,7 +311,7 @@ int set_gpio_value(int case_id, int gpio_pin, char *gpio_value, int len)
     ret = debugfs_set_attr(gpiostr, "value", gpio_value, len);
     snprintf(gpiostr, sizeof(gpiostr), "Set GPIO%d value = %d", gpio_pin,
              atoi(gpio_value));
-    print_log(LOG_TAG, case_id, gpiostr);
+    print_test_case_log(LOG_TAG, case_id, gpiostr);
 
     return ret;
 }
@@ -335,7 +335,7 @@ int get_gpio_value(int case_id, int gpio_pin, char *gpio_value, int len)
     ret = debugfs_get_attr(gpiostr, "value", gpio_value, len);
     snprintf(gpiostr, sizeof(gpiostr), "GPIO%d value = %d", gpio_pin,
              atoi(gpio_value));
-    print_log(LOG_TAG, case_id, gpiostr);
+    print_test_case_log(LOG_TAG, case_id, gpiostr);
 
     return ret;
 }
@@ -359,7 +359,7 @@ int set_gpio_edge(int case_id, int gpio_pin, char *gpio_edge, int len)
     ret = debugfs_set_attr(gpiostr, "edge", gpio_edge, len);
     snprintf(gpiostr, sizeof(gpiostr), "Set GPIO%d edge = %s", gpio_pin,
              gpio_edge);
-    print_log(LOG_TAG, case_id, gpiostr);
+    print_test_case_log(LOG_TAG, case_id, gpiostr);
 
     return ret;
 }
@@ -382,7 +382,7 @@ int get_gpio_edge(int case_id, int gpio_pin, char *gpio_edge, int len)
              ;
     ret = debugfs_get_attr(gpiostr, "edge", gpio_edge, len);
     snprintf(gpiostr, sizeof(gpiostr), "GPIO%d edge = %s", gpio_pin, gpio_edge);
-    print_log(LOG_TAG, case_id, gpiostr);
+    print_test_case_log(LOG_TAG, case_id, gpiostr);
 
     return ret;
 }
@@ -397,7 +397,7 @@ int get_gpio_edge(int case_id, int gpio_pin, char *gpio_edge, int len)
 void check_step_result(int case_id, int ret)
 {
     if (ret) {
-        print_log(LOG_TAG, case_id, strerror(-ret));
+        print_test_case_log(LOG_TAG, case_id, strerror(-ret));
     }
 }
 
