@@ -26,14 +26,56 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* libfwtest.h */
-void dumpargs(int argc, char **argv);
+#include "stdio.h"
+#include "./include/libfwtest.h"
 
-/* implement in log.c */
-void print_test_case_result(char *TAG, int case_id, int result, char *data);
-void print_test_case_result_only(int case_id, int result);
-void print_test_case_log(char *TAG, int case_id, char *data);
+/**
+ * @brief print test case result.
+ *
+ * @param TAG The test module name.
+ * @param case_id The testlink id for test case.
+ * @param result The test result.
+ * @param data The error reason or if needed.
+ */
+void print_test_case_result(char *TAG, int case_id, int result, char *data)
+{
+    if (!TAG)
+        TAG = "NONE";
 
-/* fwtools */
-int debugfs_get_attr(char *class_path, const char *attr, char *value, int len);
-int debugfs_set_attr(char *class_path, const char *attr, char *value, int len);
+    if (!result || !data)
+        return print_test_case_result_only(case_id, result);
+    else
+    {
+        printf("\n[I][%s-%d][fail][%s]\n", TAG, case_id, data);
+        print_test_case_result_only(case_id, result);
+     }
+}
+
+/**
+ * @brief print test case result without data.
+ *
+ * @param case_id The testlink id for test case.
+ * @param result The test result.
+ */
+void print_test_case_result_only(int case_id, int result)
+{
+    printf("\n[A][ARA-%d][%s]\n", case_id, result? "fail": "pass");
+}
+
+/**
+ * @brief print debug message.
+ *
+ * @param TAG The test module name.
+ * @param case_id The testlink id for test case.
+ * @param data The debug message.
+ */
+void print_test_case_log(char *TAG, int case_id, char *data)
+{
+    if (!TAG)
+        TAG = "NONE";
+
+    if (!data)
+        data = "NONE";
+
+    printf("\n[D][%s-%d][%s]\n", TAG, case_id, data);
+}
