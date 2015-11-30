@@ -62,14 +62,14 @@ static void print_usage()
 {
     printf("\nUsage: gpiotest [-c case-id] [-t number-type] [-1 gpio-pin1]"
            "[-2 gpio-pin2] [-3 gpio-pin3]\n");
-    printf("    -c: TestLink test case ID.\n");
+    printf("    -c: Testrail test case ID.\n");
     printf("    -t: 's' for Single pin test or 'm' for Multiple pins test.\n");
     printf("    -1: GPIO pin1 number for single pin or multiple pins test\n");
     printf("    -2: GPIO pin2 number for multiple pins test\n");
     printf("    -3: GPIO pin3 number for multiple pins test\n");
-    printf("Example : case ARA-270 use SDB board, GPIO had 3 pins can\n");
+    printf("Example : case C1031 use SDB board, GPIO had 3 pins can\n");
     printf("     test(GPIO0 GPIO8 GPIO9)\n");
-    printf("     ./gpiotest -c 270 -t m -1 0 -2 8 -3 9\n");
+    printf("     ./gpiotest -c 1031 -t m -1 0 -2 8 -3 9\n");
  }
 
 /**
@@ -139,9 +139,9 @@ static int command_parse(struct gpio_app_info *info, int argc, char **argv)
 }
 
 /**
- * @brief TestLink test case ARA-263
+ * @brief Testrail test case C1028
  *
- * ARA-263: GPIO line count response contains the number of GPIO lines used by
+ * C1028: GPIO line count response contains the number of GPIO lines used by
  * the GPIO Controller. This test case verifies that the GPIO Line Count
  * Response payload contains a one-byte value corresponding to the number of
  * lines managed by the GPIO Controller
@@ -149,7 +149,7 @@ static int command_parse(struct gpio_app_info *info, int argc, char **argv)
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_263_get_count(struct gpio_app_info *info)
+static int ARA_1028_get_count(struct gpio_app_info *info)
 {
     int ret = 0;
     char gpiostr[PATH_MAX];
@@ -170,15 +170,15 @@ static int ARA_263_get_count(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-264
+ * @brief Testrail test case C1029
  *
- * ARA-264: Generate multiple GPIO activate Request. This test case verifies
+ * C1029: Generate multiple GPIO activate Request. This test case verifies
  * that multiple GPIO Activate Request operations can be executed successfully
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_264_multiple_activate(struct gpio_app_info *info)
+static int ARA_1029_multiple_activate(struct gpio_app_info *info)
 {
     int ret = 0;
 
@@ -215,15 +215,15 @@ static int ARA_264_multiple_activate(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-267
+ * @brief Testrail test case C1030
  *
- * ARA-267: Generate multiple GPIO Deactivate Request. This test case verifies
+ * C1030: Generate multiple GPIO Deactivate Request. This test case verifies
  * that multiple GPIO Deactivate Request operations can be executed successfully
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_267_multiple_deactivate(struct gpio_app_info *info)
+static int ARA_1030_multiple_deactivate(struct gpio_app_info *info)
 {
     int ret = 0;
 
@@ -261,15 +261,15 @@ static int ARA_267_multiple_deactivate(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-270
+ * @brief Testrail test case C1031
  *
- * ARA-270: Generate multiple GPIO Direction Request. This test case verifies
+ * C1031: Generate multiple GPIO Direction Request. This test case verifies
  * that multiple GPIO Direction Request operations can be executed successfully
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_270_multiple_direction(struct gpio_app_info *info)
+static int ARA_1031_multiple_direction(struct gpio_app_info *info)
 {
     int ret = 0;
     /* Get GPIO direction buffer */
@@ -329,21 +329,21 @@ static int ARA_270_multiple_direction(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-271
+ * @brief Testrail test case C1032
  *
- * ARA-271: GPIO Direction Request multiple times for the same GPIO line. This
+ * C1032: GPIO Direction Request multiple times for the same GPIO line. This
  * test case verifies that multiple GPIO Direction Request operations for the
  * same GPIO line do not generate an error message
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_271_multiple_times_direction(struct gpio_app_info *info)
+static int ARA_1032_multiple_times_direction(struct gpio_app_info *info)
 {
     int ret = 0, i = 0;
     /* Get GPIO direction buffer */
     char directbuf[4];
-    /* TestLink test case test 10 times */
+    /* Testrail test case test 10 times */
     int test_times = 10;
 
     /* Activate GPIO pin */
@@ -382,16 +382,16 @@ static int ARA_271_multiple_times_direction(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-272
+ * @brief Testrail test case C1033
  *
- * ARA-272: GPIO Direction Request for all the GPIO lines. This test case
+ * C1033: GPIO Direction Request for all the GPIO lines. This test case
  * verifies that GPIO Direction Request Operations can be initiated for all the
  * GPIO lines including lines that have not been activated
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_272_all_direction(struct gpio_app_info *info)
+static int ARA_1033_all_direction(struct gpio_app_info *info)
 {
     int ret = 0, i = 0;
     /* Get GPIO direction buffer */
@@ -464,16 +464,16 @@ static int ARA_272_all_direction(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-273
+ * @brief Testrail test case C1034
  *
- * ARA-273: Generate multiple GPIO Direction Input Request. This test case
+ * C1034: Generate multiple GPIO Direction Input Request. This test case
  * verifies that multiple GPIO Direction Input Request operations can be
  * executed successfully
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_273_multiple_input(struct gpio_app_info *info)
+static int ARA_1034_multiple_input(struct gpio_app_info *info)
 {
     int ret = 0;
     /* GPIO debugfs buffer */
@@ -564,23 +564,23 @@ static int ARA_273_multiple_input(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-274
+ * @brief Testrail test case C1035
  *
- * ARA-274: GPIO direction input request multiple times for the same GPIO line.
+ * C1035: GPIO direction input request multiple times for the same GPIO line.
  * This test case verifies that multiple GPIO Direction Input Request operations
  * for the same GPIO line do not generate an error message
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_274_multiple_times_input(struct gpio_app_info *info)
+static int ARA_1035_multiple_times_input(struct gpio_app_info *info)
 {
     int ret = 0, i = 0;
     /* GPIO debugfs buffer */
     char buf[4];
     /* Set GPIO direction string */
     char directbuf[] = "in";
-    /* TestLink test case test 10 times */
+    /* Testrail test case test 10 times */
     int test_times = 10;
 
     /* Activate GPIO pin */
@@ -632,16 +632,16 @@ static int ARA_274_multiple_times_input(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-276
+ * @brief Testrail test case C1036
  *
- * ARA-276: Generate multiple GPIO direction output request. This test case
+ * C1036: Generate multiple GPIO direction output request. This test case
  * verifies that multiple GPIO Direction Output Request operations can be
  * executed successfully.
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_276_multiple_output(struct gpio_app_info *info)
+static int ARA_1036_multiple_output(struct gpio_app_info *info)
 {
     int ret = 0, i = 0;
     /* GPIO debugfs buffer */
@@ -732,23 +732,23 @@ static int ARA_276_multiple_output(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-277
+ * @brief Testrail test case C1037
  *
- * ARA-277: GPIO direction output request multiple times for the same line. This
+ * C1037: GPIO direction output request multiple times for the same line. This
  * test case verifies that multiple GPIO Direction Output Request operations for
  * the same GPIO line do not generate an error message
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_277_multiple_times_output(struct gpio_app_info *info)
+static int ARA_1037_multiple_times_output(struct gpio_app_info *info)
 {
     int ret = 0, i = 0;
     /* GPIO debugfs buffer */
     char buf[4];
     /* Set GPIO direction string */
     char directbuf[] = "out";
-    /* TestLink test case test 10 times */
+    /* Testrail test case test 10 times */
     int test_times = 10;
 
     /* Activate GPIO pin */
@@ -800,16 +800,16 @@ static int ARA_277_multiple_times_output(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-279
+ * @brief Testrail test case C1038
  *
- * ARA-279: GPIO get response payload returns GPIO line current value. This test
+ * C1038: GPIO get response payload returns GPIO line current value. This test
  * case verifies that the GPIO Get Response payload contains a 1-byte value
  * indicating the GPIO Line Value
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_279_get_value(struct gpio_app_info *info)
+static int ARA_1038_get_value(struct gpio_app_info *info)
 {
     int ret = 0;
     /* GPIO debugfs buffer */
@@ -886,15 +886,15 @@ static int ARA_279_get_value(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-281
+ * @brief Testrail test case C1039
  *
- * ARA-281: Set GPIO line to high. This test case verifies that a given GPIO
+ * C1039: Set GPIO line to high. This test case verifies that a given GPIO
  * Line can be set to HIGH using the GPIO Set Request operation.
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_281_set_value_high(struct gpio_app_info *info)
+static int ARA_1039_set_value_high(struct gpio_app_info *info)
 {
     int ret = 0;
     /* GPIO debugfs buffer */
@@ -975,15 +975,15 @@ static int ARA_281_set_value_high(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-282
+ * @brief Testrail test case C1040
  *
- * ARA-282: Set GPIO line to low. This test case verifies that a given GPIO Line
+ * C1040: Set GPIO line to low. This test case verifies that a given GPIO Line
  * can be set to LOW using the GPIO Set Request operation
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_282_set_value_low(struct gpio_app_info *info)
+static int ARA_1040_set_value_low(struct gpio_app_info *info)
 {
    int ret = 0;
     char buf[4];                /* GPIO debugfs buffer */
@@ -1061,16 +1061,16 @@ static int ARA_282_set_value_low(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-286
+ * @brief Testrail test case C1041
  *
- * ARA-286: GPIO IRQ type can be set to EDGE_RISING. This test case verifies
+ * C1041: GPIO IRQ type can be set to EDGE_RISING. This test case verifies
  * that the GPIO IRQ Type Response doesn't return an error when setting the GPIO
  * IRQ Type is set to IRQ_TYPE_EDGE_RISING
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_286_set_edge_rising(struct gpio_app_info *info)
+static int ARA_1041_set_edge_rising(struct gpio_app_info *info)
 {
     int ret = 0;
     /* GPIO debugfs buffer */
@@ -1151,16 +1151,16 @@ static int ARA_286_set_edge_rising(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-287
+ * @brief Testrail test case C1042
  *
- * ARA-287: GPIO IRQ type can be set to EDGE_FALLING. This test case verifies
+ * C1042: GPIO IRQ type can be set to EDGE_FALLING. This test case verifies
  * that the GPIO IRQ Type Response doesn't return an error when setting the GPIO
  * IRQ Type is set to IRQ_TYPE_EDGE_FALLING.
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_287_set_edge_falling(struct gpio_app_info *info)
+static int ARA_1042_set_edge_falling(struct gpio_app_info *info)
 {
     int ret = 0;
     /* GPIO debugfs buffer */
@@ -1241,16 +1241,16 @@ static int ARA_287_set_edge_falling(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-288
+ * @brief Testrail test case C1043
  *
- * ARA-288: GPIO IRQ type can be set to EDGE_BOTH. This test case verifies that
+ * C1043: GPIO IRQ type can be set to EDGE_BOTH. This test case verifies that
  * the GPIO IRQ Type Response doesn't return an error when setting the GPIO IRQ
  * Type is set to IRQ_TYPE_EDGE_BOTH.
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_288_set_edge_both(struct gpio_app_info *info)
+static int ARA_1043_set_edge_both(struct gpio_app_info *info)
 {
     int ret = 0;
     /* GPIO debugfs buffer */
@@ -1331,16 +1331,16 @@ static int ARA_288_set_edge_both(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-409
+ * @brief Testrail test case C1044
  *
- * ARA-409: Change input line to output line. This test case verifies that a
+ * C1044: Change input line to output line. This test case verifies that a
  * previously configure GPIO line as an Input Line can be reconfigured to an
  * Output Line
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_409_input_to_output(struct gpio_app_info *info)
+static int ARA_1044_input_to_output(struct gpio_app_info *info)
 {
     int ret = 0;
     /* GPIO debugfs buffer */
@@ -1451,16 +1451,16 @@ static int ARA_409_input_to_output(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-410
+ * @brief Testrail test case C1045
  *
- * ARA-410: Change output line to input line. This test case verifies that a
+ * C1045: Change output line to input line. This test case verifies that a
  * previously configure GPIO line as an output line can be reconfigured to an
  * input line
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_410_output_to_input(struct gpio_app_info *info)
+static int ARA_1045_output_to_input(struct gpio_app_info *info)
 {
     int ret = 0;
     /* GPIO debugfs buffer */
@@ -1558,16 +1558,16 @@ static int ARA_410_output_to_input(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-411
+ * @brief Testrail test case C1046
  *
- * ARA-411: Change IRQ type from falling edge to rising edge. This test case
+ * C1046: Change IRQ type from falling edge to rising edge. This test case
  * verifies that the IRQ type can be changed from IRQ_TYPE_EDGE_FALLIN to
  * IRQ_TYPE_EDGE_RISING
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_411_falling_to_rising(struct gpio_app_info *info)
+static int ARA_1046_falling_to_rising(struct gpio_app_info *info)
 {
     int ret = 0;
     /* GPIO debugfs buffer */
@@ -1674,16 +1674,16 @@ static int ARA_411_falling_to_rising(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-412
+ * @brief Testrail test case C1047
  *
- * ARA-412: Change IRQ type from rising edge to falling edge. This test case
+ * C1047: Change IRQ type from rising edge to falling edge. This test case
  * verifies that the IRQ type can be changed from IRQ_TYPE_EDGE_RISING to
  * IRQ_TYPE_EDGE_FALLING
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_412_rising_to_falling(struct gpio_app_info *info)
+static int ARA_1047_rising_to_falling(struct gpio_app_info *info)
 {
     int ret = 0;
     /* GPIO debugfs buffer */
@@ -1790,16 +1790,16 @@ static int ARA_412_rising_to_falling(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-413
+ * @brief Testrail test case C1048
  *
- * ARA-413: Change IRQ type from rising edge to falling edge triggered. This
+ * C1048: Change IRQ type from rising edge to falling edge triggered. This
  * test case verifies that the IRQ type can be changed from IRQ_TYPE_EDGE_RISING
  * to IRQ_TYPE_EDGE_BOTH
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_413_rising_to_both(struct gpio_app_info *info)
+static int ARA_1048_rising_to_both(struct gpio_app_info *info)
 {
     int ret = 0;
     /* GPIO debugfs buffer */
@@ -1906,16 +1906,16 @@ static int ARA_413_rising_to_both(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-416
+ * @brief Testrail test case C1049
  *
- * ARA-416: Change IRQ type from none to rising and falling edge. This test case
+ * C1049: Change IRQ type from none to rising and falling edge. This test case
  * verifies that the IRQ type can be changed from IRQ_TYPE_NONE to
  * IRQ_TYPE_EDGE_BOTH
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_416_none_to_both(struct gpio_app_info *info)
+static int ARA_1049_none_to_both(struct gpio_app_info *info)
 {
     int ret = 0;
     /* GPIO debugfs buffer */
@@ -2022,16 +2022,16 @@ static int ARA_416_none_to_both(struct gpio_app_info *info)
 }
 
 /**
- * @brief TestLink test case ARA-417
+ * @brief Testrail test case C1050
  *
- * ARA-417: Change IRQ type from rising and falling edge to none. This test case
+ * C1050: Change IRQ type from rising and falling edge to none. This test case
  * verifies that the IRQ type can be changed from IRQ_TYPE_EDGE_BOTH to
  * IRQ_TYPE_NONE.
  *
  * @param info The GPIO info from user
  * @return 0 on success, error code on failure
  */
-static int ARA_417_both_to_none(struct gpio_app_info *info)
+static int ARA_1050_both_to_none(struct gpio_app_info *info)
 {
     int ret = 0;
     /* GPIO debugfs buffer */
@@ -2146,52 +2146,52 @@ static int ARA_417_both_to_none(struct gpio_app_info *info)
 static int switch_case_number(struct gpio_app_info *info)
 {
         switch (info->case_id) {
-            case 263:
-                return ARA_263_get_count(info);
-            case 264:
-                return ARA_264_multiple_activate(info);
-            case 267:
-                return ARA_267_multiple_deactivate(info);
-            case 270:
-                return ARA_270_multiple_direction(info);
-            case 271:
-                return ARA_271_multiple_times_direction(info);
-            case 272:
-                return ARA_272_all_direction(info);
-            case 273:
-                return ARA_273_multiple_input(info);
-            case 274:
-                return ARA_274_multiple_times_input(info);
-            case 276:
-                return ARA_276_multiple_output(info);
-            case 277:
-                return ARA_277_multiple_times_output(info);
-            case 279:
-                return ARA_279_get_value(info);
-            case 281:
-                return ARA_281_set_value_high(info);
-            case 282:
-                return ARA_282_set_value_low(info);
-            case 286:
-                return ARA_286_set_edge_rising(info);
-            case 287:
-                return ARA_287_set_edge_falling(info);
-            case 288:
-                return ARA_288_set_edge_both(info);
-            case 409:
-                return ARA_409_input_to_output(info);
-            case 410:
-                return ARA_410_output_to_input(info);
-            case 411:
-                return ARA_411_falling_to_rising(info);
-            case 412:
-                return ARA_412_rising_to_falling(info);
-            case 413:
-                return ARA_413_rising_to_both(info);
-            case 416:
-                return ARA_416_none_to_both(info);
-            case 417:
-                return ARA_417_both_to_none(info);
+            case 1028:
+                return ARA_1028_get_count(info);
+            case 1029:
+                return ARA_1029_multiple_activate(info);
+            case 1030:
+                return ARA_1030_multiple_deactivate(info);
+            case 1031:
+                return ARA_1031_multiple_direction(info);
+            case 1032:
+                return ARA_1032_multiple_times_direction(info);
+            case 1033:
+                return ARA_1033_all_direction(info);
+            case 1034:
+                return ARA_1034_multiple_input(info);
+            case 1035:
+                return ARA_1035_multiple_times_input(info);
+            case 1036:
+                return ARA_1036_multiple_output(info);
+            case 1037:
+                return ARA_1037_multiple_times_output(info);
+            case 1038:
+                return ARA_1038_get_value(info);
+            case 1039:
+                return ARA_1039_set_value_high(info);
+            case 1040:
+                return ARA_1040_set_value_low(info);
+            case 1041:
+                return ARA_1041_set_edge_rising(info);
+            case 1042:
+                return ARA_1042_set_edge_falling(info);
+            case 1043:
+                return ARA_1043_set_edge_both(info);
+            case 1044:
+                return ARA_1044_input_to_output(info);
+            case 1045:
+                return ARA_1045_output_to_input(info);
+            case 1046:
+                return ARA_1046_falling_to_rising(info);
+            case 1047:
+                return ARA_1047_rising_to_falling(info);
+            case 1048:
+                return ARA_1048_rising_to_both(info);
+            case 1049:
+                return ARA_1049_none_to_both(info);
+            case 1050:
+                return ARA_1050_both_to_none(info);
             default:
                 print_test_case_log(LOG_TAG, 0,
                                     "Error: The command had error case_id.");
