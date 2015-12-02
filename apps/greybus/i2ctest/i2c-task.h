@@ -49,7 +49,7 @@ struct gb_i2c_info {
     int buf;
 };
 
-int ARA_556_i2cgetfunsupport(struct gb_i2c_info *info);
-int ARA_556_i2creaddata(struct gb_i2c_info *info);
+int ARA_1001_i2cgetfunsupport(struct gb_i2c_info *info);
+int ARA_1002_i2creaddata(struct gb_i2c_info *info);
 
 #endif /* I2C_TASK_H_FILE */

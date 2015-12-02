@@ -47,17 +47,17 @@ void print_usage(void)
 {
     printf("\nUsage: i2ctest [-c case_id] [-b bus_id] [-a device_address] "
            "[-i index] [-d data]\n");
-    printf("    -c: Testlink test id, support 556 and 1393.\n");
+    printf("    -c: Testrail test id, support 1001 and 1002.\n");
     printf("    -b: bus number in decimal integer.\n");
     printf("    -a: device address in decimal integer.\n");
     printf("    -i: access the byte address in decimal integer.\n");
     printf("    -d: data need to input in test case.\n");
-    printf("        For case 556, it is support functions.\n");
-    printf("        For case 1393, it is the decimal integer that read "
+    printf("        For case 1001, it is support functions.\n");
+    printf("        For case 1002, it is the decimal integer that read "
            "from the byte address.\n");
 
-    printf("For case 556, i2ctest -c 556 [-b bus_id][-d data] \n");
-    printf("For case 1393, i2ctest -c 1393 [-b bus_id] [-a device_address] "
+    printf("For case 1001, i2ctest -c 1001 [-b bus_id][-d data] \n");
+    printf("For case 1002, i2ctest -c 1002 [-b bus_id] [-a device_address] "
            "[-i index] [-d data] \n\n");
 }
 
@@ -107,15 +107,15 @@ int main(int argc, char *argv[])
 
     switch (caseid)
     {
-        case 556:
+        case 1001:
             if (data)
                 snprintf(i2c_info.functionality, sizeof(i2c_info.functionality), "%s", data);
-            ret = ARA_556_i2cgetfunsupport(&i2c_info);
+            ret = ARA_1001_i2cgetfunsupport(&i2c_info);
             break;
-        case 1393:
+        case 1002:
             if (data)
                 i2c_info.buf = atoi(data);
-            ret = ARA_556_i2creaddata(&i2c_info);
+            ret = ARA_1002_i2creaddata(&i2c_info);
             break;
         default:
             ret = -ENOINPUT;

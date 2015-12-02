@@ -86,7 +86,7 @@ int force_set_slave_addr(int file, int address)
  *
  * @return return the result compare with data and get HW function.
  */
-int ARA_556_i2cgetfunsupport(struct gb_i2c_info *info)
+int ARA_1001_i2cgetfunsupport(struct gb_i2c_info *info)
 {
     unsigned long funcs;
     int file;
@@ -125,7 +125,7 @@ int ARA_556_i2cgetfunsupport(struct gb_i2c_info *info)
  *
  * @return return the result compare with data and read from HW.
  */
-int ARA_556_i2creaddata(struct gb_i2c_info *info)
+int ARA_1002_i2creaddata(struct gb_i2c_info *info)
 {
     int file;
     int ret ;
