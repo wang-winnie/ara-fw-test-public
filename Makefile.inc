@@ -4,7 +4,8 @@ SHELL = /bin/bash
 
 # set build output dir
 TOPDIR:=$(abspath $(dir $(lastword $(MAKEFILE_LIST))))
-OUTDIR:=$(TOPDIR)/build
+PLATFORM:=sdb
+OUTDIR:=$(TOPDIR)/build/$(PLATFORM)
 
 APPINCLUDES = \
     $(TOPDIR)/apps/include \
@@ -22,8 +23,8 @@ ARCHOPTIMIZATION =
 ARCHCPUFLAGS =
 ARCHINCLUDES =
 ARCHDEFINES =
-CC = @$(CROSSPRE)gcc
-CPP = @$(CROSSPRE)gcc -E
+CC = $(CROSSPRE)gcc
+CPP = $(CROSSPRE)gcc -E
 
 TOOLDIR := $(shell dirname -- $(GCCTOOL))
 export PATH := $(TOOLDIR):$(PATH)

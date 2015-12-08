@@ -1,0 +1,50 @@
+{
+    "device_type": "ara-sdb-helium",
+    "job_name": "firmware-deploy",
+    "logging_level": "DEBUG",
+    "image_type": "android",
+    "priority": "high",
+    "timeout": 18000,
+    "actions": [
+        {
+            "command": "deploy_firmware",
+            "parameters": {
+                "board" : "sdb",
+                "fwdevice" : "apb1",
+                "method" : "flashrom",
+                "url" : "%%FW_WGET_URL%%/ara-bridge-es2-debug-apbridgea",
+                "name": "ara-bridge-es2-debug-apbridgea",
+                "version" : "%%FW_GIT_REV%%"
+            }
+        },
+        {
+            "command": "deploy_firmware",
+            "parameters": {
+                "board" : "sdb",
+                "fwdevice" : "apb2",
+                "method" : "flashrom",
+                "url" : "%%FW_WGET_URL%%/ara-bridge-es2-debug-generic",
+                "name": "ara-bridge-es2-debug-generic",
+                "version" : "%%FW_GIT_REV%%"
+            }
+        },
+        {
+            "command": "deploy_firmware",
+            "parameters": {
+                "board" : "sdb",
+                "fwdevice" : "svc",
+                "method" : "jtag",
+                "url" : "%%FW_WGET_URL%%/ara-svc-sdb",
+                "name": "ara-svc-sdb",
+                "version" : "%%FW_GIT_REV%%"
+            }
+        },
+        {
+            "command": "submit_results",
+            "parameters": {
+                "server": "%%LAVA_RESULTS_URL%%",
+                "stream": "%%LAVA_RESULTS_STREAM%%"
+            }
+        }
+    ]
+}

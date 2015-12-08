@@ -1,0 +1,59 @@
+{
+    "device_type": "ara-sdb-helium",
+    "image_type": "android",
+    "job_name": "android-deploy",
+    "timeout": 18000,
+    "actions": [
+    {
+        "command": "deploy_linaro_android_image",
+        "metadata":
+        {
+            "android.build": "%%ANDROID_META_BUILD%%",
+            "android.name": "%%ANDROID_META_NAME%%"
+        },
+        "parameters":
+        {
+            "images": [
+            {
+                "partition": "boot",
+                "url": "%%ANDROID_WGET_URL%%/boot.img"
+            },
+            {
+                "partition": "system",
+                "url": "%%ANDROID_WGET_URL%%/system.img"
+            },
+            {
+                "partition": "userdata",
+                "url": "%%ANDROID_WGET_URL%%/userdata.img"
+            },
+            {
+                "partition": "vendor",
+                "url": "%%ANDROID_WGET_URL%%/vendor.img"
+            },
+            {
+                "partition": "cache",
+                "url": "%%ANDROID_WGET_URL%%/cache.img"
+            },
+            {
+                "partition": "dtb",
+                "url": "%%ANDROID_WGET_URL%%/pxa1928-helium.dtb"
+            }
+            ]
+        }
+    },
+    {
+        "command": "boot_linaro_android_image",
+        "parameters":
+        {
+            "test_image_prompt": "root@pxa1928"
+        }
+    },
+    {
+        "command": "submit_results",
+        "parameters":
+        {
+                "server": "%%LAVA_RESULTS_URL%%",
+                "stream": "%%LAVA_RESULTS_STREAM%%"
+        }
+    }]
+}

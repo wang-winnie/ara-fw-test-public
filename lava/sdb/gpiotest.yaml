@@ -1,0 +1,33 @@
+metadata:
+  name: gpiotest
+  format: Lava-Test Test Definition 1.0
+  description: "Greybus GPIO test for SDB"
+
+run:
+  steps:
+    - "lava-test-case ARA-1028  --shell ./gpiotest -c 1028"
+    - "lava-test-case ARA-1029  --shell ./gpiotest -c 1029 -t m -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1030  --shell ./gpiotest -c 1030 -t m -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1031  --shell ./gpiotest -c 1031 -t m -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1032  --shell ./gpiotest -c 1032 -t s -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1033  --shell ./gpiotest -c 1033 -t m -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1034  --shell ./gpiotest -c 1034 -t m -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1035  --shell ./gpiotest -c 1035 -t s -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1036  --shell ./gpiotest -c 1036 -t m -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1037  --shell ./gpiotest -c 1037 -t s -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1038  --shell ./gpiotest -c 1038 -t m -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1039  --shell ./gpiotest -c 1039 -t s -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1040  --shell ./gpiotest -c 1040 -t s -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1041  --shell ./gpiotest -c 1041 -t s -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1042  --shell ./gpiotest -c 1042 -t s -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1043  --shell ./gpiotest -c 1043 -t s -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1044  --shell ./gpiotest -c 1044 -t s -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1045  --shell ./gpiotest -c 1045 -t s -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1046  --shell ./gpiotest -c 1046 -t s -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1047  --shell ./gpiotest -c 1047 -t s -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1048  --shell ./gpiotest -c 1048 -t s -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1049  --shell ./gpiotest -c 1049 -t s -1 0 -2 8 -3 9"
+    - "lava-test-case ARA-1050  --shell ./gpiotest -c 1050 -t s -1 0 -2 8 -3 9"
+
+parse:
+   pattern: "(\\[A\\]\\[(?P<test_case_id>.+)\\]\\[(?P<result>(.+))\\])"

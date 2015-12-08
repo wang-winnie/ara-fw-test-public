@@ -3,21 +3,18 @@
 include Makefile.inc
 
 
-.PHONY: all apps lava clean
+.PHONY: all clean
 
-all: apps lava
-
-apps:
+all:
+	$(RM) -rf $(TOPDIR)/build
+	mkdir -p $(OUTDIR)/apps
 	$(Q)$(MAKE) -C apps
 	@if [ $$? -ne 0 ] ; then exit; fi;
-
-lava:
-	$(Q)$(MAKE) -C lava
-	@if [ $$? -ne 0 ] ; then exit; fi;
+	mkdir -p $(OUTDIR)/lava
+	cp -r ./lava/$(PLATFORM)/* $(OUTDIR)/lava/
 
 clean:
-	$(RM) -rf $(OUTDIR)
-	$(Q)$(MAKE) -C lava clean 2>&1 > /dev/null
+	$(RM) -rf $(TOPDIR)/build
 	$(Q)$(MAKE) -C apps clean 2>&1 > /dev/null
 
 

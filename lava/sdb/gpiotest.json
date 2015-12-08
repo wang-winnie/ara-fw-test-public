@@ -1,0 +1,35 @@
+{
+    "actions": [
+    {
+        "command": "dummy_deploy",
+        "parameters": {
+            "target_type": "android"
+        }
+    },
+    {
+        "command": "lava_test_shell",
+        "parameters":
+        {
+            "lava_test_dir": "/data/local/tmp/lava",
+            "lava_test_results_dir": "/local/tmp/lava",
+            "testdef_repos": [
+            {
+                "git-repo": "%%LAVA_GIT_URL%%/gpiotest.git",
+                "testdef": "gpiotest.yaml"
+            }],
+            "timeout": 1800
+        }
+    },
+    {
+        "command": "submit_results",
+        "parameters":
+        {
+                "server": "%%LAVA_RESULTS_URL%%",
+                "stream": "%%LAVA_RESULTS_STREAM%%"
+        }
+    }],
+    "device_type": "ara-sdb-helium",
+    "image_type": "android",
+    "job_name": "gpiotest",
+    "timeout": 18000
+}
