@@ -479,7 +479,7 @@ static int ARA_1034_multiple_input(struct gpio_app_info *info)
     /* GPIO debugfs buffer */
     char buf[4];
     /* Set GPIO direction string */
-    char directbuf[] = "in";
+    char inputGPIODir[] = "in";
 
     /* Activate multiple GPIO pins */
     if (!(strncasecmp(info->num_type, "m", strlen("m") + 1))) {
@@ -498,17 +498,19 @@ static int ARA_1034_multiple_input(struct gpio_app_info *info)
 
     /* Set GPIO direction is input */
     if (!(strncasecmp(info->num_type, "m", strlen("m") + 1))) {
-        strcpy(buf, directbuf);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), inputGPIODir,
+                                 sizeof(inputGPIODir));
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin2), buf, sizeof(buf));
+                                 info->gpio_pin2), inputGPIODir,
+                                 sizeof(inputGPIODir));
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin3), buf, sizeof(buf));
+                                 info->gpio_pin3), inputGPIODir,
+                                 sizeof(inputGPIODir));
     } else if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, directbuf);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), inputGPIODir,
+                                 sizeof(inputGPIODir));
     } else {
         ret = -EINVAL;
     }
@@ -520,25 +522,25 @@ static int ARA_1034_multiple_input(struct gpio_app_info *info)
         ret = get_gpio_direction(info->case_id, (info->base_pin +
                                  info->gpio_pin1), buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, directbuf);
+            ret = strcmp(buf, inputGPIODir);
         }
 
         ret = get_gpio_direction(info->case_id, (info->base_pin +
                                  info->gpio_pin2), buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, directbuf);
+            ret = strcmp(buf, inputGPIODir);
         }
 
         ret = get_gpio_direction(info->case_id, (info->base_pin +
                                  info->gpio_pin3), buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, directbuf);
+            ret = strcmp(buf, inputGPIODir);
         }
     } else if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
         ret = get_gpio_direction(info->case_id, (info->base_pin +
                                  info->gpio_pin1), buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, directbuf);
+            ret = strcmp(buf, inputGPIODir);
         }
     } else {
         ret = -EINVAL;
@@ -579,7 +581,7 @@ static int ARA_1035_multiple_times_input(struct gpio_app_info *info)
     /* GPIO debugfs buffer */
     char buf[4];
     /* Set GPIO direction string */
-    char directbuf[] = "in";
+    char inputGPIODir[] = "in";
     /* Testrail test case test 10 times */
     int test_times = 10;
 
@@ -596,9 +598,9 @@ static int ARA_1035_multiple_times_input(struct gpio_app_info *info)
     /* Set GPIO direction is input and set 10 times. */
     for (i = 0; i < test_times; i++) {
         if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-            strcpy(buf, directbuf);
             ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                     info->gpio_pin1), buf, sizeof(buf));
+                                     info->gpio_pin1), inputGPIODir,
+                                     sizeof(inputGPIODir));
         } else {
             ret = -EINVAL;
         }
@@ -611,7 +613,7 @@ static int ARA_1035_multiple_times_input(struct gpio_app_info *info)
         ret = get_gpio_direction(info->case_id, (info->base_pin +
                                  info->gpio_pin1), buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, directbuf);
+            ret = strcmp(buf, inputGPIODir);
         }
     } else {
         ret = -EINVAL;
@@ -647,7 +649,7 @@ static int ARA_1036_multiple_output(struct gpio_app_info *info)
     /* GPIO debugfs buffer */
     char buf[4];
     /* Set GPIO direction string */
-    char directbuf[] = "out";
+    char outputGPIODir[] = "out";
 
     /* Activate multiple GPIO pins */
     if (!(strncasecmp(info->num_type, "m", strlen("m") + 1))) {
@@ -666,17 +668,19 @@ static int ARA_1036_multiple_output(struct gpio_app_info *info)
 
     /* Set GPIO direction is output */
     if (!(strncasecmp(info->num_type, "m", strlen("m") + 1))) {
-        strcpy(buf, directbuf);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), outputGPIODir,
+                                 sizeof(outputGPIODir));
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin2), buf, sizeof(buf));
+                                 info->gpio_pin2), outputGPIODir,
+                                 sizeof(outputGPIODir));
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin3), buf, sizeof(buf));
+                                 info->gpio_pin3), outputGPIODir,
+                                 sizeof(outputGPIODir));
     } else if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, directbuf);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), outputGPIODir,
+                                 sizeof(outputGPIODir));
     } else {
         ret = -EINVAL;
     }
@@ -688,25 +692,25 @@ static int ARA_1036_multiple_output(struct gpio_app_info *info)
         ret = get_gpio_direction(info->case_id, (info->base_pin +
                                  info->gpio_pin1), buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, directbuf);
+            ret = strcmp(buf, outputGPIODir);
         }
 
         ret = get_gpio_direction(info->case_id, (info->base_pin +
                                  info->gpio_pin2), buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, directbuf);
+            ret = strcmp(buf, outputGPIODir);
         }
 
         ret = get_gpio_direction(info->case_id, (info->base_pin +
                                  info->gpio_pin3), buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, directbuf);
+            ret = strcmp(buf, outputGPIODir);
         }
     } else if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
         ret = get_gpio_direction(info->case_id, (info->base_pin +
                                  info->gpio_pin1), buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, directbuf);
+            ret = strcmp(buf, outputGPIODir);
         }
     } else {
         ret = -EINVAL;
@@ -747,7 +751,7 @@ static int ARA_1037_multiple_times_output(struct gpio_app_info *info)
     /* GPIO debugfs buffer */
     char buf[4];
     /* Set GPIO direction string */
-    char directbuf[] = "out";
+    char outputGPIODir[] = "out";
     /* Testrail test case test 10 times */
     int test_times = 10;
 
@@ -764,9 +768,9 @@ static int ARA_1037_multiple_times_output(struct gpio_app_info *info)
     /* Set GPIO direction is output and set 10 times. */
     for (i = 0; i < test_times; i++) {
         if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-            strcpy(buf, directbuf);
             ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                     info->gpio_pin1), buf, sizeof(buf));
+                                     info->gpio_pin1), outputGPIODir,
+                                     sizeof(outputGPIODir));
         } else {
             ret = -EINVAL;
         }
@@ -779,7 +783,7 @@ static int ARA_1037_multiple_times_output(struct gpio_app_info *info)
         ret = get_gpio_direction(info->case_id, (info->base_pin +
                                  info->gpio_pin1), buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, directbuf);
+            ret = strcmp(buf, outputGPIODir);
         }
     } else {
         ret = -EINVAL;
@@ -815,7 +819,7 @@ static int ARA_1038_get_value(struct gpio_app_info *info)
     /* GPIO debugfs buffer */
     char buf[4];
     /* Set GPIO direction string */
-    char directbuf[] = "in";
+    char inputGPIODir[] = "in";
 
     /* activate multiple GPIO pins */
     if (!(strncasecmp(info->num_type, "m", strlen("m") + 1))) {
@@ -834,17 +838,19 @@ static int ARA_1038_get_value(struct gpio_app_info *info)
 
     /* Set GPIO direction is input */
     if (!(strncasecmp(info->num_type, "m", strlen("m") + 1))) {
-        strcpy(buf, directbuf);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), inputGPIODir,
+                                 sizeof(inputGPIODir));
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin2), buf, sizeof(buf));
+                                 info->gpio_pin2), inputGPIODir,
+                                 sizeof(inputGPIODir));
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin3), buf, sizeof(buf));
+                                 info->gpio_pin3), inputGPIODir,
+                                 sizeof(inputGPIODir));
     } else if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, directbuf);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), inputGPIODir,
+                                 sizeof(inputGPIODir));
     } else {
         ret = -EINVAL;
     }
@@ -900,9 +906,9 @@ static int ARA_1039_set_value_high(struct gpio_app_info *info)
     /* GPIO debugfs buffer */
     char buf[4];
     /* Set GPIO direction string */
-    char directbuf[] = "out";
+    char outputGPIODir[] = "out";
     /* Set GPIO value string */
-    char valuebuf[] = "1";
+    char highGPIOValue[] = "1";
 
     /* activate GPIO pins */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
@@ -916,9 +922,9 @@ static int ARA_1039_set_value_high(struct gpio_app_info *info)
 
     /* Set GPIO direction is output */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, directbuf);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), outputGPIODir,
+                                 sizeof(outputGPIODir));
     } else {
         ret = -EINVAL;
     }
@@ -927,9 +933,8 @@ static int ARA_1039_set_value_high(struct gpio_app_info *info)
 
     /* Set GPIO value is 1(high) */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, valuebuf);
         ret = set_gpio_value(info->case_id, (info->base_pin + info->gpio_pin1),
-                             buf, sizeof(buf));
+                             highGPIOValue, sizeof(highGPIOValue));
     } else {
         ret = -EINVAL;
     }
@@ -941,7 +946,7 @@ static int ARA_1039_set_value_high(struct gpio_app_info *info)
         ret = get_gpio_direction(info->case_id, (info->base_pin +
                                  info->gpio_pin1), buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, directbuf);
+            ret = strcmp(buf, outputGPIODir);
         }
     } else {
         ret = -EINVAL;
@@ -954,7 +959,7 @@ static int ARA_1039_set_value_high(struct gpio_app_info *info)
         ret = get_gpio_value(info->case_id, (info->base_pin + info->gpio_pin1),
                              buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, valuebuf);
+            ret = strcmp(buf, highGPIOValue);
         }
     } else {
         ret = -EINVAL;
@@ -985,10 +990,13 @@ static int ARA_1039_set_value_high(struct gpio_app_info *info)
  */
 static int ARA_1040_set_value_low(struct gpio_app_info *info)
 {
-   int ret = 0;
-    char buf[4];                /* GPIO debugfs buffer */
-    char directbuf[] = "out";   /* Set GPIO direction string */
-    char valuebuf[] = "0";      /* Set GPIO value string */
+    int ret = 0;
+    /* GPIO debugfs buffer */
+    char buf[4];
+    /* Set GPIO direction string */
+    char outputGPIODir[] = "out";
+    /* Set GPIO value string */
+    char lowGPIOValue[] = "0";
 
     /* activate GPIO pins */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
@@ -1002,9 +1010,9 @@ static int ARA_1040_set_value_low(struct gpio_app_info *info)
 
     /* Set GPIO direction is output */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, directbuf);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), outputGPIODir,
+                                 sizeof(outputGPIODir));
     } else {
         ret = -EINVAL;
     }
@@ -1013,9 +1021,8 @@ static int ARA_1040_set_value_low(struct gpio_app_info *info)
 
     /* Set GPIO value is 0(low) */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, valuebuf);
         ret = set_gpio_value(info->case_id, (info->base_pin + info->gpio_pin1),
-                             buf, sizeof(buf));
+                             lowGPIOValue, sizeof(lowGPIOValue));
     } else {
         ret = -EINVAL;
     }
@@ -1027,7 +1034,7 @@ static int ARA_1040_set_value_low(struct gpio_app_info *info)
         ret = get_gpio_direction(info->case_id, (info->base_pin +
                                  info->gpio_pin1), buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, directbuf);
+            ret = strcmp(buf, outputGPIODir);
         }
     } else {
         ret = -EINVAL;
@@ -1040,7 +1047,7 @@ static int ARA_1040_set_value_low(struct gpio_app_info *info)
         ret = get_gpio_value(info->case_id, (info->base_pin + info->gpio_pin1),
                              buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, valuebuf);
+            ret = strcmp(buf, lowGPIOValue);
         }
     } else {
         ret = -EINVAL;
@@ -1076,11 +1083,11 @@ static int ARA_1041_set_edge_rising(struct gpio_app_info *info)
     /* GPIO debugfs buffer */
     char buf[8];
     /* Set GPIO direction string */
-    char directbuf[] = "out";
+    char outputGPIODir[] = "out";
     /* Set GPIO value string */
-    char valuebuf[] = "1";
+    char highGPIOValue[] = "1";
     /* Set GPIO edge string */
-    char edgebuf[] = "rising";
+    char risGPIOEdge[] = "rising";
 
     /* Activate GPIO pins */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
@@ -1094,9 +1101,9 @@ static int ARA_1041_set_edge_rising(struct gpio_app_info *info)
 
     /* Set GPIO direction is output */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, directbuf);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), outputGPIODir,
+                                 sizeof(outputGPIODir));
     } else {
         ret = -EINVAL;
     }
@@ -1105,9 +1112,8 @@ static int ARA_1041_set_edge_rising(struct gpio_app_info *info)
 
     /* Set GPIO value is 1(high) */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, valuebuf);
         ret = set_gpio_value(info->case_id, (info->base_pin + info->gpio_pin1),
-                             buf, sizeof(buf));
+                             highGPIOValue, sizeof(highGPIOValue));
     } else {
         ret = -EINVAL;
     }
@@ -1116,9 +1122,8 @@ static int ARA_1041_set_edge_rising(struct gpio_app_info *info)
 
     /* Set GPIO edge is rising */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, edgebuf);
         ret = set_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
-                            buf, sizeof(buf));
+                            risGPIOEdge, sizeof(risGPIOEdge));
     } else {
         ret = -EINVAL;
     }
@@ -1130,7 +1135,7 @@ static int ARA_1041_set_edge_rising(struct gpio_app_info *info)
         ret = get_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
                             buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, edgebuf);
+            ret = strcmp(buf, risGPIOEdge);
         }
     } else {
         ret = -EINVAL;
@@ -1166,11 +1171,11 @@ static int ARA_1042_set_edge_falling(struct gpio_app_info *info)
     /* GPIO debugfs buffer */
     char buf[8];
     /* Set GPIO direction string */
-    char directbuf[] = "out";
+    char outputGPIODir[] = "out";
     /* Set GPIO value string */
-    char valuebuf[] = "1";
+    char highGPIOValue[] = "1";
     /* Set GPIO edge string */
-    char edgebuf[] = "falling";
+    char fallGPIOEdge[] = "falling";
 
     /* Activate GPIO pins */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
@@ -1184,9 +1189,9 @@ static int ARA_1042_set_edge_falling(struct gpio_app_info *info)
 
     /* Set GPIO direction is output */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, directbuf);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), outputGPIODir,
+                                 sizeof(outputGPIODir));
     } else {
         ret = -EINVAL;
     }
@@ -1195,9 +1200,8 @@ static int ARA_1042_set_edge_falling(struct gpio_app_info *info)
 
     /* Set GPIO value is 1(high) */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, valuebuf);
         ret = set_gpio_value(info->case_id, (info->base_pin + info->gpio_pin1),
-                             buf, sizeof(buf));
+                             highGPIOValue, sizeof(highGPIOValue));
     } else {
         ret = -EINVAL;
     }
@@ -1206,9 +1210,8 @@ static int ARA_1042_set_edge_falling(struct gpio_app_info *info)
 
     /* Set GPIO edge is falling */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, edgebuf);
         ret = set_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
-                            buf, sizeof(buf));
+                            fallGPIOEdge, sizeof(fallGPIOEdge));
     } else {
         ret = -EINVAL;
     }
@@ -1220,7 +1223,7 @@ static int ARA_1042_set_edge_falling(struct gpio_app_info *info)
         ret = get_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
                             buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, edgebuf);
+            ret = strcmp(buf, fallGPIOEdge);
         }
     } else {
         ret = -EINVAL;
@@ -1256,11 +1259,11 @@ static int ARA_1043_set_edge_both(struct gpio_app_info *info)
     /* GPIO debugfs buffer */
     char buf[8];
     /* Set GPIO direction string */
-    char directbuf[] = "out";
+    char outputGPIODir[] = "out";
     /* Set GPIO value string */
-    char valuebuf[] = "1";
+    char highGPIOValue[] = "1";
     /* Set GPIO edge string */
-    char edgebuf[] = "both";
+    char bothGPIOEdge[] = "both";
 
     /* activate GPIO pins */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
@@ -1274,9 +1277,9 @@ static int ARA_1043_set_edge_both(struct gpio_app_info *info)
 
     /* Set GPIO direction is output */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, directbuf);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), outputGPIODir,
+                                 sizeof(outputGPIODir));
     } else {
         ret = -EINVAL;
     }
@@ -1285,9 +1288,8 @@ static int ARA_1043_set_edge_both(struct gpio_app_info *info)
 
     /* Set GPIO value is 1(high) */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, valuebuf);
         ret = set_gpio_value(info->case_id, (info->base_pin + info->gpio_pin1),
-                             buf, sizeof(buf));
+                             highGPIOValue, sizeof(highGPIOValue));
     } else {
         ret = -EINVAL;
     }
@@ -1296,9 +1298,8 @@ static int ARA_1043_set_edge_both(struct gpio_app_info *info)
 
     /* Set GPIO edge is both */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, edgebuf);
         ret = set_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
-                            buf, sizeof(buf));
+                            bothGPIOEdge, sizeof(bothGPIOEdge));
     } else {
         ret = -EINVAL;
     }
@@ -1310,7 +1311,7 @@ static int ARA_1043_set_edge_both(struct gpio_app_info *info)
         ret = get_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
                             buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, edgebuf);
+            ret = strcmp(buf, bothGPIOEdge);
         }
     } else {
         ret = -EINVAL;
@@ -1346,11 +1347,11 @@ static int ARA_1044_input_to_output(struct gpio_app_info *info)
     /* GPIO debugfs buffer */
     char buf[4];
     /* Set GPIO direction string */
-    char directbuf1[] = "in";
+    char inputGPIODir[] = "in";
     /* Set GPIO direction string */
-    char directbuf2[] = "out";
+    char outputGPIODir[] = "out";
     /* Set GPIO value string */
-    char valuebuf[] = "1";
+    char highGPIOValue[] = "1";
 
     /* activate GPIO pins */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
@@ -1364,9 +1365,9 @@ static int ARA_1044_input_to_output(struct gpio_app_info *info)
 
     /* Set GPIO direction is input */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, directbuf1);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), inputGPIODir,
+                                 sizeof(inputGPIODir));
     } else {
         ret = -EINVAL;
     }
@@ -1405,9 +1406,9 @@ static int ARA_1044_input_to_output(struct gpio_app_info *info)
 
     /* Set GPIO direction is output */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, directbuf2);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), outputGPIODir,
+                                 sizeof(outputGPIODir));
     } else {
         ret = -EINVAL;
     }
@@ -1416,9 +1417,8 @@ static int ARA_1044_input_to_output(struct gpio_app_info *info)
 
     /* Set GPIO value is 1(high) */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, valuebuf);
         ret = set_gpio_value(info->case_id, (info->base_pin + info->gpio_pin1),
-                             buf, sizeof(buf));
+                             highGPIOValue, sizeof(highGPIOValue));
     } else {
         ret = -EINVAL;
     }
@@ -1430,7 +1430,7 @@ static int ARA_1044_input_to_output(struct gpio_app_info *info)
         ret = get_gpio_value(info->case_id, (info->base_pin + info->gpio_pin1),
                              buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, valuebuf);
+            ret = strcmp(buf, highGPIOValue);
         }
     } else {
         ret = -EINVAL;
@@ -1466,11 +1466,11 @@ static int ARA_1045_output_to_input(struct gpio_app_info *info)
     /* GPIO debugfs buffer */
     char buf[4];
     /* Set GPIO direction string */
-    char directbuf1[] = "out";
+    char outputGPIODir[] = "out";
     /* Set GPIO direction string */
-    char directbuf2[] = "in";
+    char inputGPIODir[] = "in";
     /* Set GPIO value string */
-    char valuebuf[] = "1";
+    char highGPIOValue[] = "1";
 
     /* activate GPIO pins */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
@@ -1484,9 +1484,9 @@ static int ARA_1045_output_to_input(struct gpio_app_info *info)
 
     /* Set GPIO direction is output */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, directbuf1);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), outputGPIODir,
+                                 sizeof(outputGPIODir));
     } else {
         ret = -EINVAL;
     }
@@ -1495,9 +1495,8 @@ static int ARA_1045_output_to_input(struct gpio_app_info *info)
 
     /* Set GPIO value is 1(high) */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, valuebuf);
         ret = set_gpio_value(info->case_id, (info->base_pin + info->gpio_pin1),
-                             buf, sizeof(buf));
+                             highGPIOValue, sizeof(highGPIOValue));
     } else {
         ret = -EINVAL;
     }
@@ -1526,9 +1525,9 @@ static int ARA_1045_output_to_input(struct gpio_app_info *info)
 
     /* Set GPIO direction is input */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, directbuf2);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), inputGPIODir,
+                                 sizeof(inputGPIODir));
     } else {
         ret = -EINVAL;
     }
@@ -1573,13 +1572,13 @@ static int ARA_1046_falling_to_rising(struct gpio_app_info *info)
     /* GPIO debugfs buffer */
     char buf[8];
     /* Set GPIO direction string */
-    char directbuf[] = "out";
+    char outputGPIODir[] = "out";
     /* Set GPIO value string */
-    char valuebuf[] = "1";
+    char highGPIOValue[] = "1";
     /* Set GPIO edge string */
-    char edgebuf1[] = "falling";
+    char fallGPIOEdge[] = "falling";
     /* Set GPIO edge string */
-    char edgebuf2[] = "rising";
+    char risGPIOEdge[] = "rising";
 
     /* activate GPIO pins */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
@@ -1593,9 +1592,9 @@ static int ARA_1046_falling_to_rising(struct gpio_app_info *info)
 
     /* Set GPIO direction is output */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, directbuf);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), outputGPIODir,
+                                 sizeof(outputGPIODir));
     } else {
         ret = -EINVAL;
     }
@@ -1604,9 +1603,8 @@ static int ARA_1046_falling_to_rising(struct gpio_app_info *info)
 
     /* Set GPIO value is 1(high) */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, valuebuf);
         ret = set_gpio_value(info->case_id, (info->base_pin + info->gpio_pin1),
-                             buf, sizeof(buf));
+                             highGPIOValue, sizeof(highGPIOValue));
     } else {
         ret = -EINVAL;
     }
@@ -1615,9 +1613,8 @@ static int ARA_1046_falling_to_rising(struct gpio_app_info *info)
 
     /* Set GPIO edge is falling */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, edgebuf1);
         ret = set_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
-                            buf, sizeof(buf));
+                            fallGPIOEdge, sizeof(fallGPIOEdge));
     } else {
         ret = -EINVAL;
     }
@@ -1629,7 +1626,7 @@ static int ARA_1046_falling_to_rising(struct gpio_app_info *info)
         ret = get_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
                             buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, edgebuf1);
+            ret = strcmp(buf, fallGPIOEdge);
         }
     } else {
         ret = -EINVAL;
@@ -1639,9 +1636,8 @@ static int ARA_1046_falling_to_rising(struct gpio_app_info *info)
 
     /* Set GPIO edge is rising */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, edgebuf2);
         ret = set_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
-                            buf, sizeof(buf));
+                            risGPIOEdge, sizeof(risGPIOEdge));
     } else {
         ret = -EINVAL;
     }
@@ -1653,7 +1649,7 @@ static int ARA_1046_falling_to_rising(struct gpio_app_info *info)
         ret = get_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
                             buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, edgebuf2);
+            ret = strcmp(buf, risGPIOEdge);
         }
     } else {
         ret = -EINVAL;
@@ -1689,13 +1685,13 @@ static int ARA_1047_rising_to_falling(struct gpio_app_info *info)
     /* GPIO debugfs buffer */
     char buf[8];
     /* Set GPIO direction string */
-    char directbuf[] = "out";
+    char outputGPIODir[] = "out";
     /* Set GPIO value string */
-    char valuebuf[] = "1";
+    char highGPIOValue[] = "1";
     /* Set GPIO edge string */
-    char edgebuf1[] = "rising";
+    char risGPIOEdge[] = "rising";
     /* Set GPIO edge string */
-    char edgebuf2[] = "falling";
+    char fallGPIOEdge[] = "falling";
 
     /* activate GPIO pins */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
@@ -1709,9 +1705,9 @@ static int ARA_1047_rising_to_falling(struct gpio_app_info *info)
 
     /* Set GPIO direction is output */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, directbuf);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), outputGPIODir,
+                                 sizeof(outputGPIODir));
     } else {
         ret = -EINVAL;
     }
@@ -1720,9 +1716,8 @@ static int ARA_1047_rising_to_falling(struct gpio_app_info *info)
 
     /* Set GPIO value is 1(high) */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, valuebuf);
         ret = set_gpio_value(info->case_id, (info->base_pin + info->gpio_pin1),
-                             buf, sizeof(buf));
+                             highGPIOValue, sizeof(highGPIOValue));
     } else {
         ret = -EINVAL;
     }
@@ -1731,9 +1726,8 @@ static int ARA_1047_rising_to_falling(struct gpio_app_info *info)
 
     /* Set GPIO edge is rising */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, edgebuf1);
         ret = set_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
-                            buf, sizeof(buf));
+                            risGPIOEdge, sizeof(risGPIOEdge));
     } else {
         ret = -EINVAL;
     }
@@ -1745,7 +1739,7 @@ static int ARA_1047_rising_to_falling(struct gpio_app_info *info)
         ret = get_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
                             buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, edgebuf1);
+            ret = strcmp(buf, risGPIOEdge);
         }
     } else {
         ret = -EINVAL;
@@ -1755,9 +1749,8 @@ static int ARA_1047_rising_to_falling(struct gpio_app_info *info)
 
     /* Set GPIO edge is falling */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, edgebuf2);
         ret = set_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
-                            buf, sizeof(buf));
+                            fallGPIOEdge, sizeof(fallGPIOEdge));
     } else {
         ret = -EINVAL;
     }
@@ -1769,7 +1762,7 @@ static int ARA_1047_rising_to_falling(struct gpio_app_info *info)
         ret = get_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
                             buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, edgebuf2);
+            ret = strcmp(buf, fallGPIOEdge);
         }
     } else {
         ret = -EINVAL;
@@ -1805,13 +1798,13 @@ static int ARA_1048_rising_to_both(struct gpio_app_info *info)
     /* GPIO debugfs buffer */
     char buf[8];
     /* Set GPIO direction string */
-    char directbuf[] = "out";
+    char outputGPIODir[] = "out";
     /* Set GPIO value string */
-    char valuebuf[] = "1";
+    char highGPIOValue[] = "1";
     /* Set GPIO edge string */
-    char edgebuf1[] = "rising";
+    char risGPIOEdge[] = "rising";
     /* Set GPIO edge string */
-    char edgebuf2[] = "both";
+    char bothGPIOEdge[] = "both";
 
     /* activate GPIO pins */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
@@ -1825,9 +1818,9 @@ static int ARA_1048_rising_to_both(struct gpio_app_info *info)
 
     /* Set GPIO direction is output */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, directbuf);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), outputGPIODir,
+                                 sizeof(outputGPIODir));
     } else {
         ret = -EINVAL;
     }
@@ -1836,9 +1829,8 @@ static int ARA_1048_rising_to_both(struct gpio_app_info *info)
 
     /* Set GPIO value is 1(high) */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, valuebuf);
         ret = set_gpio_value(info->case_id, (info->base_pin + info->gpio_pin1),
-                             buf, sizeof(buf));
+                             highGPIOValue, sizeof(highGPIOValue));
     } else {
         ret = -EINVAL;
     }
@@ -1847,9 +1839,8 @@ static int ARA_1048_rising_to_both(struct gpio_app_info *info)
 
     /* Set GPIO edge is rising */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, edgebuf1);
         ret = set_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
-                            buf, sizeof(buf));
+                            risGPIOEdge, sizeof(risGPIOEdge));
     } else {
         ret = -EINVAL;
     }
@@ -1861,7 +1852,7 @@ static int ARA_1048_rising_to_both(struct gpio_app_info *info)
         ret = get_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
                             buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, edgebuf1);
+            ret = strcmp(buf, risGPIOEdge);
         }
     } else {
         ret = -EINVAL;
@@ -1871,9 +1862,8 @@ static int ARA_1048_rising_to_both(struct gpio_app_info *info)
 
     /* Set GPIO edge is both */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, edgebuf2);
         ret = set_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
-                            buf, sizeof(buf));
+                            bothGPIOEdge, sizeof(bothGPIOEdge));
     } else {
         ret = -EINVAL;
     }
@@ -1885,7 +1875,7 @@ static int ARA_1048_rising_to_both(struct gpio_app_info *info)
         ret = get_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
                             buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, edgebuf2);
+            ret = strcmp(buf, bothGPIOEdge);
         }
     } else {
         ret = -EINVAL;
@@ -1921,13 +1911,13 @@ static int ARA_1049_none_to_both(struct gpio_app_info *info)
     /* GPIO debugfs buffer */
     char buf[8];
     /* Set GPIO direction string */
-    char directbuf[] = "out";
+    char outputGPIODir[] = "out";
     /* Set GPIO value string */
-    char valuebuf[] = "1";
+    char highGPIOValue[] = "1";
     /* Set GPIO edge string */
-    char edgebuf1[] = "none";
+    char noneGPIOEdge[] = "none";
     /* Set GPIO edge string */
-    char edgebuf2[] = "both";
+    char bothGPIOEdge[] = "both";
 
     /* activate GPIO pins */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
@@ -1941,9 +1931,9 @@ static int ARA_1049_none_to_both(struct gpio_app_info *info)
 
     /* Set GPIO direction is output */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, directbuf);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), outputGPIODir,
+                                 sizeof(outputGPIODir));
     } else {
         ret = -EINVAL;
     }
@@ -1952,9 +1942,8 @@ static int ARA_1049_none_to_both(struct gpio_app_info *info)
 
     /* Set GPIO value is 1(high) */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, valuebuf);
         ret = set_gpio_value(info->case_id, (info->base_pin + info->gpio_pin1),
-                             buf, sizeof(buf));
+                             highGPIOValue, sizeof(highGPIOValue));
     } else {
         ret = -EINVAL;
     }
@@ -1963,9 +1952,8 @@ static int ARA_1049_none_to_both(struct gpio_app_info *info)
 
     /* Set GPIO edge is none */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, edgebuf1);
         ret = set_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
-                            buf, sizeof(buf));
+                            noneGPIOEdge, sizeof(noneGPIOEdge));
     } else {
         ret = -EINVAL;
     }
@@ -1977,7 +1965,7 @@ static int ARA_1049_none_to_both(struct gpio_app_info *info)
         ret = get_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
                             buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, edgebuf1);
+            ret = strcmp(buf, noneGPIOEdge);
         }
     } else {
         ret = -EINVAL;
@@ -1987,9 +1975,8 @@ static int ARA_1049_none_to_both(struct gpio_app_info *info)
 
     /* Set GPIO edge is both */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, edgebuf2);
         ret = set_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
-                            buf, sizeof(buf));
+                            bothGPIOEdge, sizeof(bothGPIOEdge));
     } else {
         ret = -EINVAL;
     }
@@ -2001,7 +1988,7 @@ static int ARA_1049_none_to_both(struct gpio_app_info *info)
         ret = get_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
                             buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, edgebuf2);
+            ret = strcmp(buf, bothGPIOEdge);
         }
     } else {
         ret = -EINVAL;
@@ -2037,13 +2024,13 @@ static int ARA_1050_both_to_none(struct gpio_app_info *info)
     /* GPIO debugfs buffer */
     char buf[8];
     /* Set GPIO direction string */
-    char directbuf[] = "out";
+    char outputGPIODir[] = "out";
     /* Set GPIO value string */
-    char valuebuf[] = "1";
+    char highGPIOValue[] = "1";
     /* Set GPIO edge string */
-    char edgebuf1[] = "both";
+    char bothGPIOEdge[] = "both";
     /* Set GPIO edge string */
-    char edgebuf2[] = "none";
+    char noneGPIOEdge[] = "none";
 
     /* Activate GPIO pins */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
@@ -2057,9 +2044,9 @@ static int ARA_1050_both_to_none(struct gpio_app_info *info)
 
     /* Set GPIO direction is output */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, directbuf);
         ret = set_gpio_direction(info->case_id, (info->base_pin +
-                                 info->gpio_pin1), buf, sizeof(buf));
+                                 info->gpio_pin1), outputGPIODir,
+                                 sizeof(outputGPIODir));
     } else {
         ret = -EINVAL;
     }
@@ -2068,9 +2055,8 @@ static int ARA_1050_both_to_none(struct gpio_app_info *info)
 
     /* Set GPIO value is 1(high) */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, valuebuf);
         ret = set_gpio_value(info->case_id, (info->base_pin + info->gpio_pin1),
-                             buf, sizeof(buf));
+                             highGPIOValue, sizeof(highGPIOValue));
     } else {
         ret = -EINVAL;
     }
@@ -2079,9 +2065,8 @@ static int ARA_1050_both_to_none(struct gpio_app_info *info)
 
     /* Set GPIO edge is both */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, edgebuf1);
         ret = set_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
-                            buf, sizeof(buf));
+                            bothGPIOEdge, sizeof(bothGPIOEdge));
     } else {
         ret = -EINVAL;
     }
@@ -2093,7 +2078,7 @@ static int ARA_1050_both_to_none(struct gpio_app_info *info)
         ret = get_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
                             buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, edgebuf1);
+            ret = strcmp(buf, bothGPIOEdge);
         }
     } else {
         ret = -EINVAL;
@@ -2103,9 +2088,8 @@ static int ARA_1050_both_to_none(struct gpio_app_info *info)
 
     /* Set GPIO edge is none */
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
-        strcpy(buf, edgebuf2);
         ret = set_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
-                            buf, sizeof(buf));
+                            noneGPIOEdge, sizeof(noneGPIOEdge));
     } else {
         ret = -EINVAL;
     }
@@ -2117,7 +2101,7 @@ static int ARA_1050_both_to_none(struct gpio_app_info *info)
         ret = get_gpio_edge(info->case_id, (info->base_pin + info->gpio_pin1),
                             buf, sizeof(buf));
         if (!ret) {
-            ret = strcmp(buf, edgebuf2);
+            ret = strcmp(buf, noneGPIOEdge);
         }
     } else {
         ret = -EINVAL;
@@ -2130,6 +2114,145 @@ static int ARA_1050_both_to_none(struct gpio_app_info *info)
     if (!(strncasecmp(info->num_type, "s", strlen("s") + 1))) {
         ret = deactivate_gpio_pin(info->case_id, (info->base_pin +
                                   info->gpio_pin1));
+    } else {
+        ret = -EINVAL;
+    }
+
+    return ret;
+}
+
+/**
+ * @brief Testrail test case C2542
+ *
+ * C2542: GPIO loopback test.
+ *
+ * @param info The GPIO info from user
+ * @return 0 on success, error code on failure
+ */
+static int ARA_2542_loopback(struct gpio_app_info *info)
+{
+    int ret = 0;
+    /* GPIO debugfs buffer */
+    char buf[8];
+    /* Set GPIO direction string */
+    char inputGPIODir[] = "in";
+    /* Set GPIO direction string */
+    char outputGPIODir[] = "out";
+    /* Set GPIO value string */
+    char lowGPIOValue[] = "0";
+    /* Set GPIO value string */
+    char highGPIOValue[] = "1";
+
+    /* Activate GPIO pinA */
+    if (!(strncasecmp(info->num_type, "m", strlen("m")))) {
+        ret = activate_gpio_pin(info->case_id, (info->base_pin +
+                                info->gpio_pin1));
+    } else {
+        ret = -EINVAL;
+    }
+
+    check_step_result(info->case_id, ret);
+
+    /* Activate GPIO pinB */
+    if (!(strncasecmp(info->num_type, "m", strlen("m")))) {
+        ret = activate_gpio_pin(info->case_id, (info->base_pin +
+                                info->gpio_pin2));
+    } else {
+        ret = -EINVAL;
+    }
+
+    check_step_result(info->case_id, ret);
+
+    /* Set GPIOA direction is output */
+    if (!(strncasecmp(info->num_type, "m", strlen("m")))) {
+        ret = set_gpio_direction(info->case_id, (info->base_pin +
+                                 info->gpio_pin1), outputGPIODir,
+                                 sizeof(outputGPIODir));
+    } else {
+        ret = -EINVAL;
+    }
+
+    check_step_result(info->case_id, ret);
+
+    /* Set GPIOB direction is input */
+    if (!(strncasecmp(info->num_type, "m", strlen("m")))) {
+        ret = set_gpio_direction(info->case_id, (info->base_pin +
+                                 info->gpio_pin2), inputGPIODir,
+                                 sizeof(inputGPIODir));
+    } else {
+        ret = -EINVAL;
+    }
+
+    check_step_result(info->case_id, ret);
+
+    /* Set GPIOA value is 0(Low) */
+    if (!(strncasecmp(info->num_type, "m", strlen("m")))) {
+        ret = set_gpio_value(info->case_id, (info->base_pin + info->gpio_pin1),
+                             lowGPIOValue, sizeof(lowGPIOValue));
+    } else {
+        ret = -EINVAL;
+    }
+
+    check_step_result(info->case_id, ret);
+
+    /* Get GPIOB value, and verify GPIOB value is 0 */
+    if (!(strncasecmp(info->num_type, "m", strlen("m")))) {
+        ret = get_gpio_value(info->case_id, (info->base_pin + info->gpio_pin2),
+                             buf, sizeof(buf));
+        if (!ret) {
+            ret = strcmp(buf, lowGPIOValue);
+        }
+    } else {
+        ret = -EINVAL;
+    }
+
+    check_step_result(info->case_id, ret);
+
+    /* Set GPIOA value is 1(High) */
+    if (!(strncasecmp(info->num_type, "m", strlen("m")))) {
+        ret = set_gpio_value(info->case_id, (info->base_pin + info->gpio_pin1),
+                             highGPIOValue, sizeof(highGPIOValue));
+    } else {
+        ret = -EINVAL;
+    }
+
+    check_step_result(info->case_id, ret);
+
+    /* Get GPIOB value, and verify GPIOB value is 1 */
+    if (!(strncasecmp(info->num_type, "m", strlen("m")))) {
+        ret = get_gpio_value(info->case_id, (info->base_pin + info->gpio_pin2),
+                             buf, sizeof(buf));
+        if (!ret) {
+            ret = strcmp(buf, highGPIOValue);
+        }
+    } else {
+        ret = -EINVAL;
+    }
+
+    print_test_result(info->case_id, ret);
+
+    /* Post-condition: Recover pre-test status */
+    /* Set GPIOA value is 0(Low) */
+    if (!(strncasecmp(info->num_type, "m", strlen("m")))) {
+        ret = set_gpio_value(info->case_id, (info->base_pin + info->gpio_pin1),
+                             lowGPIOValue, sizeof(lowGPIOValue));
+    } else {
+        ret = -EINVAL;
+    }
+
+    check_step_result(info->case_id, ret);
+
+    /* Deactivate GPIO pin */
+    if (!(strncasecmp(info->num_type, "m", strlen("m")))) {
+        ret = deactivate_gpio_pin(info->case_id, (info->base_pin +
+                                  info->gpio_pin1));
+    } else {
+        ret = -EINVAL;
+    }
+
+    if (!(strncasecmp(info->num_type, "m", strlen("m")))) {
+        ret = deactivate_gpio_pin(info->case_id, (info->base_pin +
+                                  info->gpio_pin2));
     } else {
         ret = -EINVAL;
     }
@@ -2192,6 +2315,8 @@ static int switch_case_number(struct gpio_app_info *info)
                 return ARA_1049_none_to_both(info);
             case 1050:
                 return ARA_1050_both_to_none(info);
+            case 2542:
+                return ARA_2542_loopback(info);
             default:
                 print_test_case_log(LOG_TAG, 0,
                                     "Error: The command had error case_id.");
