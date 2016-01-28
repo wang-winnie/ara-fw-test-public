@@ -1,3 +1,4 @@
+#!/system/bin/sh
 #
 # Copyright (c) 2016 Google, Inc.
 # All rights reserved.
@@ -26,18 +27,32 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-include $(CURDIR)/../../../Makefile.inc
+#
+# Print audio module information(White speaker module)
+#
 
-APP=$(notdir $(CURDIR))
+CODEC=`cat /sys/kernel/debug/asoc/codecs | grep '[0-9]-[0-9][0-9]*\.[0-9]'`
 
-default: $(APP)
-	@mkdir -p $(APPOUTDIR)
-	@cp $(APP) $(APPOUTDIR)
+if [ -z $CODEC ]; then
+    echo "FAIL: audio module not found."
+    exit 1
+fi
 
-all: default
+echo "show audio module related mixer control:"
+for x in `tinymix | grep -e 'GB [0-9][0-9]*' -e 'PRI_MI2S_RX Audio Mixer MultiMedia1 ' | cut -f 1`
+do
+   tinymix $x
+done
 
-clean:
+echo ""
 
-.PHONY: all clean
+echo "show audio module related DAPM control:"
+DAPMDIR=/sys/kernel/debug/asoc/msm8994-tomtom-mtp-snd-card/$CODEC/dapm
+cd $DAPMDIR
+for f in *
+do
+    echo "[" $f "]"
+    cat "$f"
+done
 
-
+exit 0
