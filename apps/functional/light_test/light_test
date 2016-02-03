@@ -1,0 +1,184 @@
+#!/system/bin/sh
+#
+# Copyright (c) 2016 Google, Inc.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation
+# and/or other materials provided with the distribution.
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived from this
+# software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+
+# Program: this script is for light test case
+
+usage()
+{
+    echo "Usage ${0} {case_id|case_type|path|data1|data2}"
+    echo "case_id: TestRail test id."
+    echo "case_type: Test case type, possible value is r_inrange, r_exactly, "
+    echo "           w_verify, help."
+    echo "path: power supply property path."
+    echo "data1: test data for exactly string or minimum value"
+    echo "data2: test data for maximum value"
+    echo "support cases: 14631, 14632, 14633, 14634 "
+    echo
+    echo "light_test 14631 r_inrange [path] [data1] [data2]"
+    echo "the light brightness should between data1 and data2"
+    echo
+    echo "light_test 14632 w_verify [path] [data]"
+    echo "data is set as brightness value"
+    echo
+    echo "light_test 14633 r_exactly [path] [data]"
+    echo "dara is the maximun brightness"
+    echo
+    echo "light_test 14634 w_verify [path] [data]"
+    echo "data is set as maximun brightness value"
+    echo
+}
+
+printlog()
+{
+    case ${2} in
+    0)
+        echo "[A][ARA-${1}][pass]"
+        ;;
+    1)
+        if [ "${3}" == "" ]; then
+            echo "[A][ARA-${1}][fail]"
+        else
+            echo "[A][ARA-${1}][fail][${3}]"
+        fi
+        ;;
+    *)
+        ;;
+    esac
+    echo
+}
+
+stringvalidated()
+{
+    if [ "${2}" == "" ]; then
+        usage ${1}
+        printlog ${1} 1 "No such file or directory"
+        return
+    fi
+
+    if [ "${3}" == "" ]; then
+        usage ${1}
+        printlog ${1} 1 "No correct input data"
+        return
+    fi
+
+    value=`cat ${2}`
+    echo "[D][ARA-${1}][read ${2} is ${value}]"
+
+    if [ "${value}" == "${3}" ]; then
+        printlog ${1} 0
+    else
+        printlog ${1} 1
+    fi
+}
+
+rangevalidated()
+{
+    if [ "${2}" == "" ]; then
+        usage ${1}
+        printlog ${1} 1 "No such file or directory"
+        return
+    fi
+
+    if [ "${3}" == "" ]; then
+        usage ${1}
+        printlog ${1} 1 "No correct input data"
+        return
+    elif [ "${4}" == "" ]; then
+        usage ${1}
+        printlog ${1} 1 "No correct input data"
+        return
+    fi
+
+    value=`cat ${2}`
+    echo "[D][ARA-${1}][read ${2} is ${value}]"
+
+    if [ "${value}" == "" ]; then
+        printlog ${1} 1 "No such file or directory"
+    elif [ "${value}" -lt "${3}" ]; then
+        printlog ${1} 1
+    elif [ "${value}" -gt "${4}" ]; then
+        printlog ${1} 1
+    else
+        printlog ${1} 0
+    fi
+}
+
+write()
+{
+    if [ "${2}" == "" ]; then
+        printlog ${1} 1 "No such file or directory"
+        return
+    fi
+
+    if [ "${3}" == "" ]; then
+        printlog ${1} 1 "No correct input data"
+        return
+    fi
+
+    ori=`cat ${2}`
+    echo "[D][ARA-${1}][read ${2} original is ${ori}]"
+
+    if [ "${ori}" == "" ]; then
+        printlog ${1} 1 "No such file or directory"
+        return
+    fi
+
+    echo ${3} > ${2}
+
+    value=`cat ${2}`
+    echo "[D][ARA-${1}][read ${2} now is ${value}]"
+
+    echo ${ori} > ${2}
+
+    if [ "${value}" == "${3}" ]; then
+        printlog ${1} 0
+    else
+        printlog ${1} 1
+    fi
+}
+
+echo
+
+case ${2} in
+r_inrange)
+    rangevalidated ${1} ${3} ${4} ${5}
+    ;;
+r_exactly)
+    stringvalidated ${1} ${3} ${4}
+    ;;
+w_verify)
+    write ${1} ${3} ${4}
+    ;;
+help| h| ?)
+    usage ${1}
+    ;;
+*)
+    usage
+    ;;
+esac
