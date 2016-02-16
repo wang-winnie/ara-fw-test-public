@@ -30,6 +30,8 @@
 #include <string.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <sys/ioctl.h>
+#include <unistd.h>
 
 #include <linux/i2c.h>
 #include <linux/i2c-dev.h>
@@ -110,7 +112,7 @@ int ARA_1001_i2cgetfunsupport(struct gb_i2c_info *info)
         return -1;
     }
 
-    snprintf(function, size, "%x", funcs);
+    snprintf(function, size, "%lx", funcs);
 
     ret = strcmp(info->functionality ,function);
 
@@ -128,7 +130,7 @@ int ARA_1001_i2cgetfunsupport(struct gb_i2c_info *info)
 int ARA_1002_i2creaddata(struct gb_i2c_info *info)
 {
     int file;
-    int ret ;
+    int ret;
     int size = 1;
     uint8_t buf[2];
 
@@ -146,7 +148,7 @@ int ARA_1002_i2creaddata(struct gb_i2c_info *info)
         return -1;
     }
 
-    if (force_set_slave_addr(file, info->devaddress) < 0) {
+    if ((ret = force_set_slave_addr(file, info->devaddress)) < 0) {
         close(file);
         return ret;
     }
@@ -156,7 +158,7 @@ int ARA_1002_i2creaddata(struct gb_i2c_info *info)
 
     read(file, buf, size);
 
-    ret = (buf[0] == (uint8_t)info->buf) ? 0 : -1 ;
+    ret = (buf[0] == (uint8_t)info->buf) ? 0 : -1;
 
     close(file);
     return ret;
