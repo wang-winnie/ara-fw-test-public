@@ -73,7 +73,7 @@ int get_greybus_gpio_count(int gpio_pin, char *gpio_max_count, int len)
  */
 int check_greybus_gpio(int *gpio_pin, int *gpio_max_count)
 {
-    int ret = 0, i = 0;
+    int ret = 0, i = 0, found = 0;;
     DIR *fdir;
     struct dirent *ptr;
     char buf[PATH_MAX] ,gpiostr[PATH_MAX];
@@ -88,20 +88,32 @@ int check_greybus_gpio(int *gpio_pin, int *gpio_max_count)
         if (ptr->d_type == DT_LNK) {
             snprintf(gpiostr, sizeof(gpiostr), "%s%s", "/sys/class/gpio/",
                      ptr->d_name);
-            if(debugfs_get_attr(gpiostr, "label", buf, sizeof(buf)) >= 0) {
-                if(strcmp(buf, "greybus_gpio") == 0) {
+            if (!debugfs_get_attr(gpiostr, "label", buf, sizeof(buf))) {
+                if (strcmp(buf, "greybus_gpio") == 0) {
                     /* re-assign gpiostr string */
                     snprintf(gpiostr, sizeof(gpiostr), "%s%s",
                              "/sys/class/gpio/", ptr->d_name);
                     ret = debugfs_get_attr(gpiostr, "base", buf, sizeof(buf));
-                    *gpio_pin = atoi(buf);
+                    if (!ret) {
+                        *gpio_pin = atoi(buf);
+                        found = 1;
+                    }
+                    break;
                 }
             }
         }
     }
 
-    ret = get_greybus_gpio_count(*gpio_pin, buf, sizeof(buf));
-    *gpio_max_count = atoi(buf);
+    if (found) {
+        ret = get_greybus_gpio_count(*gpio_pin, buf, sizeof(buf));
+        if (!ret) {
+            *gpio_max_count = atoi(buf);
+        }
+    } else {
+        ret = -ENOENT;
+    }
+
+    closedir(fdir);
 
     return ret;
 }
